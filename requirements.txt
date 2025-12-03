@@ -1,0 +1,13 @@
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+selenium>=4.15.0
+undetected-chromedriver>=3.5.0
+setuptools  # Required for undetected-chromedriver in Python 3.12+
+
+# Data processing
+pandas>=2.1.0
+
+# Utilities
+python-dotenv>=1.0.0
