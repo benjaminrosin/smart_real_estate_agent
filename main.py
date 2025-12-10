@@ -2,10 +2,15 @@
 Main entry point for the Yad2 scraper
 """
 import argparse
+from dotenv import load_dotenv
 from scraper.scraper import Yad2Scraper
 from scraper.selenium_scraper import Yad2SeleniumScraper
 from scraper.storage import DataStorage
+from scraper.db_manager import MongoDBManager
 from scraper.config import OUTPUT_DIR, MAX_PAGES, USE_SELENIUM
+
+# Load environment variables
+load_dotenv()
 
 
 def main():
@@ -22,9 +27,9 @@ def main():
     parser.add_argument(
         '--output',
         type=str,
-        choices=['csv', 'json', 'both'],
-        default='both',
-        help='Output format (default: both)'
+        choices=['csv', 'json', 'both', 'db'],
+        default='db',
+        help='Output format: csv, json, both, or db (default: db)'
     )
     parser.add_argument(
         '--filename',
@@ -84,7 +89,16 @@ def main():
     
     # Save data
     print("\nSaving data...")
-    if args.output == 'csv':
+    if args.output == 'db':
+        # Save to MongoDB
+        db = MongoDBManager()
+        if db.connect(collection_name="listings"):
+            inserted_count = db.insert_listings(listings)
+            print(f"✓ Saved {inserted_count} listings to database")
+            db.disconnect()
+        else:
+            print("✗ Failed to connect to database")
+    elif args.output == 'csv':
         storage.save_to_csv(listings, args.filename)
     elif args.output == 'json':
         storage.save_to_json(listings, args.filename)

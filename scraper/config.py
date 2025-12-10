@@ -45,7 +45,7 @@ TIMEOUT = 30  # request timeout in seconds
 MAX_RETRIES = 3
 
 # Selenium settings
-USE_SELENIUM = True  # Use Selenium instead of requests to bypass CAPTCHA
+USE_SELENIUM = False  # Use Selenium instead of requests to bypass CAPTCHA
 HEADLESS = True  # Run browser in headless mode (no GUI)
 PAGE_LOAD_WAIT = 5  # seconds to wait for page to load
 SCROLL_BEHAVIOR = True  # Scroll page to simulate human behavior
@@ -57,4 +57,4 @@ OUTPUT_DIR = PROJECT_ROOT / "data"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Scraping settings
-MAX_PAGES = 50  # Maximum number of pages to scrape (set to None for all)
+MAX_PAGES = 1  # Maximum number of pages to scrape (set to None for all)
