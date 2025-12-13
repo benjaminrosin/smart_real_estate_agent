@@ -96,7 +96,7 @@ class MongoDBManager:
     
     def insert_listings(self, listings: List[Dict[str, Any]]) -> int:
         """
-        Insert multiple listings into the database
+        Insert multiple listings into the database (DEPRECATED - use upsert_listings)
         
         Args:
             listings: List of listing dictionaries
@@ -124,6 +124,82 @@ class MongoDBManager:
         except Exception as e:
             print(f"✗ Error inserting listings: {e}")
             return 0
+    
+    def upsert_listings(self, listings: List[Dict[str, Any]]) -> Dict[str, int]:
+        """
+        Upsert multiple listings using URL as _id
+        Updates existing listings and merges features array
+        
+        Args:
+            listings: List of listing dictionaries (must contain 'url' field)
+            
+        Returns:
+            Dictionary with counts: {'inserted': X, 'updated': Y, 'errors': Z}
+        """
+        if not self._connected:
+            print("✗ Not connected to database")
+            return {'inserted': 0, 'updated': 0, 'errors': 0}
+        
+        if not listings:
+            print("✗ No listings to upsert")
+            return {'inserted': 0, 'updated': 0, 'errors': 0}
+        
+        inserted_count = 0
+        updated_count = 0
+        error_count = 0
+        
+        current_time = datetime.utcnow()
+        
+        for listing in listings:
+            try:
+                url = listing.get('url')
+                if not url:
+                    error_count += 1
+                    continue
+                
+                # Check if listing exists
+                existing = self.collection.find_one({'_id': url})
+                
+                if existing:
+                    # Update existing listing
+                    update_doc = listing.copy()
+                    update_doc['last_seen'] = current_time
+                    update_doc['updated_at'] = current_time
+                    
+                    # Merge features if both exist
+                    if 'features' in update_doc and 'features' in existing:
+                        # Combine and deduplicate features
+                        existing_features = set(existing.get('features', []))
+                        new_features = set(update_doc.get('features', []))
+                        merged_features = list(existing_features.union(new_features))
+                        update_doc['features'] = merged_features
+                    
+                    # Remove _id from update doc to avoid modifying it
+                    update_doc.pop('_id', None)
+                    
+                    self.collection.update_one(
+                        {'_id': url},
+                        {'$set': update_doc}
+                    )
+                    updated_count += 1
+                else:
+                    # Insert new listing with URL as _id
+                    insert_doc = listing.copy()
+                    insert_doc['_id'] = url
+                    insert_doc['first_seen'] = current_time
+                    insert_doc['last_seen'] = current_time
+                    insert_doc['scraped_at'] = current_time
+                    insert_doc['deleted'] = False
+                    
+                    self.collection.insert_one(insert_doc)
+                    inserted_count += 1
+                    
+            except Exception as e:
+                print(f"✗ Error upserting listing {listing.get('url', 'unknown')}: {e}")
+                error_count += 1
+        
+        print(f"✓ Inserted: {inserted_count}, Updated: {updated_count}, Errors: {error_count}")
+        return {'inserted': inserted_count, 'updated': updated_count, 'errors': error_count}
     
     # READ operations
     
@@ -395,3 +471,55 @@ class MongoDBManager:
         except Exception as e:
             print(f"✗ Error creating index: {e}")
             return False
+    
+    def cleanup_old_listings(self, days_threshold: int = 2) -> int:
+        """
+        Mark listings as deleted if not seen in the specified number of days
+        
+        Args:
+            days_threshold: Number of days (default: 2)
+            
+        Returns:
+            Number of listings marked as deleted
+        """
+        if not self._connected:
+            print("✗ Not connected to database")
+            return 0
+        
+        try:
+            from datetime import timedelta
+            
+            # Calculate threshold date
+            threshold_date = datetime.utcnow() - timedelta(days=days_threshold)
+            
+            # Find listings not seen since threshold and not already marked as deleted
+            query = {
+                'last_seen': {'$lt': threshold_date},
+                '$or': [
+                    {'deleted': {'$exists': False}},
+                    {'deleted': False}
+                ]
+            }
+            
+            # Mark as deleted
+            result = self.collection.update_many(
+                query,
+                {
+                    '$set': {
+                        'deleted': True,
+                        'deleted_at': datetime.utcnow()
+                    }
+                }
+            )
+            
+            count = result.modified_count
+            if count > 0:
+                print(f"✓ Marked {count} listings as deleted (not seen in {days_threshold}+ days)")
+            else:
+                print(f"✓ No listings to mark as deleted")
+            
+            return count
+            
+        except Exception as e:
+            print(f"✗ Error cleaning up old listings: {e}")
+            return 0

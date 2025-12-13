@@ -4,13 +4,14 @@ Main scraper module for Yad2 real estate listings
 import requests
 import time
 import random
+import traceback
 from typing import List, Dict, Optional
 from pathlib import Path
 from datetime import datetime
 from .config import (
-    RENT_URL, USER_AGENTS, get_headers, 
+    RENT_URL, USER_AGENTS, get_headers, HEADER_PRESETS,
     REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, 
-    TIMEOUT, MAX_RETRIES, OUTPUT_DIR
+    TIMEOUT, MAX_RETRIES, MAX_RETRIES_PER_PAGE, OUTPUT_DIR, DEGUG_MODE
 )
 from .parser import Yad2Parser
 
@@ -18,16 +19,27 @@ from .parser import Yad2Parser
 class Yad2Scraper:
     """Scraper for Yad2.co.il rental property listings"""
     
-    def __init__(self, save_html: bool = False):
+    def __init__(self, db_manager=None):
         """
         Initialize the scraper
         
         Args:
+            db_manager: MongoDBManager instance for saving listings
             save_html: If True, saves raw HTML of each page for debugging
         """
+        self.db_manager = db_manager
         self.session = requests.Session()
-        self.save_html = save_html
+        self.save_html = DEGUG_MODE
         self.last_url = None  # Track last URL for referer header
+        self.current_user_agent = random.choice(USER_AGENTS)
+        self.current_header_preset = 0
+        
+        # Metrics tracking
+        self.total_pages_scraped = 0
+        self.total_listings_inserted = 0
+        self.total_captchas_encountered = 0
+        self.total_session_rotations = 0
+        self.start_time = None
         
         if self.save_html:
             # Create debug directory
@@ -35,6 +47,31 @@ class Yad2Scraper:
             self.debug_dir.mkdir(exist_ok=True, parents=True)
             self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             print(f"Debug mode: HTML pages will be saved to {self.debug_dir}")
+    
+    def _rotate_session(self, reason: str = "block"):
+        """
+        Rotate session with fresh headers and User-Agent
+        
+        Args:
+            reason: Reason for rotation (CAPTCHA/403/429)
+        """
+        # Close old session
+        self.session.close()
+        
+        # Create new session
+        self.session = requests.Session()
+        
+        # Select new User-Agent
+        old_ua = self.current_user_agent
+        self.current_user_agent = random.choice([ua for ua in USER_AGENTS if ua != old_ua])
+        
+        # Rotate header preset
+        self.current_header_preset = (self.current_header_preset + 1) % len(HEADER_PRESETS)
+        
+        # Increment counter
+        self.total_session_rotations += 1
+        
+        print(f"🔄 Session rotated (Reason: {reason}) - Rotation #{self.total_session_rotations}")
     
     def _get_random_user_agent(self) -> str:
         """Get a random user agent from the pool"""
@@ -44,43 +81,66 @@ class Yad2Scraper:
         """Get a random delay between min and max"""
         return random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX)
     
-    def fetch_page(self, url: str, retry_count: int = 0, page_num: int = None) -> Optional[str]:
+    def fetch_page(self, url: str, page_num: int = None, attempt: int = 1):
         """
-        Fetch a page with error handling and retries
+        Fetch a page with error handling and block detection
         
         Args:
             url: URL to fetch
-            retry_count: Current retry attempt
-            page_num: Page number for debug filename
+            page_num: Page number for logging and debug
+            attempt: Current attempt number (1-3)
             
         Returns:
-            HTML content as string or None if failed
+            Tuple of (html, captcha_encountered) or None if failed
         """
+        captcha_encountered = False
+        
         try:
-            # Rotate user agent for each request
-            user_agent = self._get_random_user_agent()
+            # Build headers with current preset and user agent
+            headers = get_headers(referer=self.last_url, preset_index=self.current_header_preset)
+            headers["User-Agent"] = self.current_user_agent
             
-            # Build headers with referer from last URL
-            headers = get_headers(referer=self.last_url)
-            headers["User-Agent"] = user_agent
-            
-            print(f"Fetching: {url}")
+            # Make request
             response = self.session.get(url, headers=headers, timeout=TIMEOUT)
+            
+            # Check for blocks
+            is_captcha = 'captcha' in response.text.lower() or 'challenge' in response.text.lower()
+            is_403 = response.status_code == 403
+            is_429 = response.status_code == 429
+            
+            if is_captcha or is_403 or is_429:
+                # Determine block type and delay
+                if is_captcha:
+                    block_type = "CAPTCHA"
+                    self.total_captchas_encountered += 1
+                    captcha_encountered = True
+                    delays = [60, 90, 120]  # Escalating delays for CAPTCHA
+                elif is_403:
+                    block_type = "403 Forbidden"
+                    delays = [60, 90, 120]
+                else:  # 429
+                    block_type = "429 Rate Limit"
+                    delays = [90, 120, 150]
+                
+                if attempt < MAX_RETRIES_PER_PAGE:
+                    # Rotate session
+                    self._rotate_session(reason=block_type)
+                    
+                    # Wait with escalating delay
+                    wait_time = delays[attempt - 1]
+                    print(f"⚠️  {block_type} detected on page {page_num} (Attempt {attempt}/{MAX_RETRIES_PER_PAGE}) - Waiting {wait_time}s...")
+                    time.sleep(wait_time)
+                    
+                    # Retry
+                    return self.fetch_page(url, page_num, attempt + 1)
+                else:
+                    print(f"✗ Max retries reached for page {page_num} after {block_type}")
+                    return None
+            
+            # Check for other HTTP errors
             response.raise_for_status()
             
             html = response.text
-            
-            # Check if we got a CAPTCHA page
-            if 'captcha' in html.lower() or 'challenge' in html.lower():
-                print("⚠️  CAPTCHA detected! Consider:")
-                print("   - Using Selenium with undetected-chromedriver")
-                print("   - Adding proxy rotation")
-                print("   - Increasing delays further")
-                if retry_count < MAX_RETRIES:
-                    wait_time = (retry_count + 1) * 10  # Longer wait for CAPTCHA
-                    print(f"   - Waiting {wait_time} seconds before retry...")
-                    time.sleep(wait_time)
-                    return self.fetch_page(url, retry_count + 1, page_num)
             
             # Save HTML for debugging if enabled
             if self.save_html and html:
@@ -89,23 +149,18 @@ class Yad2Scraper:
             # Update last URL for next referer
             self.last_url = url
             
-            # Add random delay to mimic human behavior
-            delay = self._get_random_delay()
-            print(f"Waiting {delay:.1f} seconds before next request...")
-            time.sleep(delay)
-            
-            return html
+            return (html, captcha_encountered)
             
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching {url}: {e}")
+            print(f"✗ Network error fetching page {page_num}: {e}")
             
-            if retry_count < MAX_RETRIES:
-                wait_time = (retry_count + 1) * 5
-                print(f"Retrying in {wait_time} seconds... (attempt {retry_count + 1}/{MAX_RETRIES})")
+            if attempt < MAX_RETRIES:
+                wait_time = attempt * 5
+                print(f"  Retrying in {wait_time}s... (attempt {attempt}/{MAX_RETRIES})")
                 time.sleep(wait_time)
-                return self.fetch_page(url, retry_count + 1, page_num)
+                return self.fetch_page(url, page_num, attempt + 1)
             else:
-                print(f"Max retries reached for {url}")
+                print(f"✗ Max retries reached for page {page_num}")
                 return None
     
     def _save_debug_html(self, html: str, page_num: int = None):
@@ -140,19 +195,19 @@ class Yad2Scraper:
         Returns:
             List of property dictionaries
         """
-        html = self.fetch_page(url)
-        if not html:
+        result = self.fetch_page(url)
+        if not result:
             return []
         
+        html, _ = result
         parser = Yad2Parser(html)
         listings = parser.extract_listings()
         
-        print(f"Extracted {len(listings)} listings from page")
         return listings
     
     def scrape_multiple_pages(self, start_url: str, max_pages: int = None) -> List[Dict]:
         """
-        Scrape multiple pages of listings
+        Scrape multiple pages of listings (DEPRECATED - use scrape_rentals instead)
         
         Args:
             start_url: Starting URL
@@ -166,8 +221,9 @@ class Yad2Scraper:
         total_pages = None
         
         # First, get total pages from page 1
-        html = self.fetch_page(start_url, page_num=1)
-        if html:
+        result = self.fetch_page(start_url, page_num=1)
+        if result:
+            html, _ = result
             parser = Yad2Parser(html)
             total_pages = parser.get_total_pages()
             if total_pages:
@@ -192,10 +248,11 @@ class Yad2Scraper:
                 page_url = f"{start_url}{separator}page={page_num}"
             
             # Get HTML
-            html = self.fetch_page(page_url, page_num=page_num)
-            if not html:
+            result = self.fetch_page(page_url, page_num=page_num)
+            if not result:
                 break
             
+            html, _ = result
             # Parse listings
             parser = Yad2Parser(html)
             listings = parser.extract_listings()
@@ -211,14 +268,151 @@ class Yad2Scraper:
         print(f"\n=== Scraping complete: {len(all_listings)} total listings from {page_count} pages ===")
         return all_listings
     
-    def scrape_rentals(self, max_pages: int = None) -> List[Dict]:
+    def scrape_rentals(self, max_pages: int = None):
         """
-        Scrape rental listings from Yad2
+        Scrape rental listings from Yad2 and save to database page-by-page
         
         Args:
             max_pages: Maximum number of pages to scrape
             
         Returns:
-            List of property dictionaries
+            None - saves directly to database
         """
-        return self.scrape_multiple_pages(RENT_URL, max_pages)
+        if not self.db_manager:
+            raise ValueError("Database manager not provided. Pass db_manager to constructor.")
+        
+        self.start_time = datetime.now()
+        start_url = RENT_URL
+        
+        # Get total pages from page 1
+        print("Fetching first page to determine total pages...")
+        page_1_start_time = time.time()
+        result = self.fetch_page(start_url, page_num=1)
+        if not result:
+            print("✗ Failed to fetch first page")
+            return
+        
+        html, page_1_had_captcha = result
+        page_1_wait_time = int(time.time() - page_1_start_time)
+        
+        parser = Yad2Parser(html)
+        total_pages = parser.get_total_pages()
+        
+        # Determine how many pages to scrape
+        pages_to_scrape = max_pages
+        if total_pages:
+            pages_to_scrape = min(max_pages, total_pages) if max_pages else total_pages
+            print(f"Total pages available: {total_pages}, will scrape: {pages_to_scrape}")
+        
+        print(f"\n{'='*80}")
+        print(f"Starting scraping session - Target: {pages_to_scrape} pages")
+        print(f"{'='*80}\n")
+        
+        # Scrape each page
+        for page_num in range(1, (pages_to_scrape or 1) + 1):
+            # Build URL with page parameter
+            if page_num == 1:
+                page_url = start_url
+                # Use already fetched HTML from first page
+                current_html = html
+                had_captcha = page_1_had_captcha
+                wait_time = page_1_wait_time
+            else:
+                separator = '&' if '?' in start_url else '?'
+                page_url = f"{start_url}{separator}page={page_num}"
+                
+                # Start timing before delay
+                page_start_time = time.time()
+                
+                # Add random delay before fetching
+                delay = self._get_random_delay()
+                time.sleep(delay)
+                
+                # Fetch page
+                result = self.fetch_page(page_url, page_num=page_num)
+                
+                if not result:
+                    print(f"Page {page_num} | Status: FAILED | Skipping...")
+                    continue
+                
+                current_html, had_captcha = result
+                wait_time = int(time.time() - page_start_time)
+            
+            # Parse listings
+            parser = Yad2Parser(current_html)
+            listings = parser.extract_listings()
+            listings_count = len(listings)
+            
+            # Determine CAPTCHA status for this page
+            captcha_status = "Yes" if had_captcha else "No"
+            
+            # Insert to database
+            try:
+                if listings_count > 0:
+                    result = self.db_manager.upsert_listings(listings)
+                    inserted = result['inserted']
+                    updated = result['updated']
+                    total_processed = inserted + updated
+                    self.total_listings_inserted += total_processed
+                    self.total_pages_scraped += 1
+                    
+                    # Single-line log
+                    print(f"Page {page_num} | Wait: {wait_time}s | Listings: {listings_count} | CAPTCHA: {captcha_status} | New: {inserted} | Updated: {updated} | Status: OK")
+                else:
+                    print(f"Page {page_num} | Wait: {wait_time}s | Listings: 0 | CAPTCHA: {captcha_status} | Status: NO_LISTINGS")
+                    
+            except Exception as e:
+                # Log error with stack trace and stop
+                print(f"\n{'='*80}")
+                print(f"✗ DATABASE INSERT ERROR on Page {page_num}")
+                print(f"{'='*80}")
+                print(f"Error: {str(e)}")
+                print(f"\nStack Trace:")
+                print(traceback.format_exc())
+                print(f"{'='*80}")
+                print(f"Scraper stopped due to database error.")
+                print(f"{'='*80}\n")
+                return
+            
+            # Check if we've reached the limit
+            if max_pages and page_num >= max_pages:
+                break
+        
+        # Print summary
+        self._print_summary()
+    
+    def get_summary(self) -> Dict:
+        """
+        Get scraping session summary
+        
+        Returns:
+            Dictionary with session statistics
+        """
+        elapsed_time = (datetime.now() - self.start_time).total_seconds() if self.start_time else 0
+        avg_listings = self.total_listings_inserted / self.total_pages_scraped if self.total_pages_scraped > 0 else 0
+        
+        return {
+            'total_pages_scraped': self.total_pages_scraped,
+            'total_listings_inserted': self.total_listings_inserted,
+            'total_captchas_encountered': self.total_captchas_encountered,
+            'total_session_rotations': self.total_session_rotations,
+            'elapsed_time_seconds': elapsed_time,
+            'average_listings_per_page': avg_listings
+        }
+    
+    def _print_summary(self):
+        """Print detailed summary of scraping session"""
+        summary = self.get_summary()
+        elapsed_minutes = summary['elapsed_time_seconds'] / 60
+        
+        print(f"\n{'='*80}")
+        print(f"SCRAPING SESSION SUMMARY")
+        print(f"{'='*80}")
+        print(f"Total Pages Scraped:        {summary['total_pages_scraped']}")
+        print(f"Total Listings Inserted:    {summary['total_listings_inserted']}")
+        print(f"Average Listings/Page:      {summary['average_listings_per_page']:.2f}")
+        print(f"CAPTCHAs Encountered:       {summary['total_captchas_encountered']}")
+        print(f"Session Rotations:          {summary['total_session_rotations']}")
+        print(f"Total Time Elapsed:         {elapsed_minutes:.2f} minutes ({summary['elapsed_time_seconds']:.0f} seconds)")
+        print(f"{'='*80}\n")
+
