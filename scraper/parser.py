@@ -59,7 +59,9 @@ class Yad2Parser:
         link_elem = item.find('a', href=True)
         if link_elem:
             href = link_elem['href']
-            data['url'] = f"https://www.yad2.co.il{href}" if href.startswith('/') else href
+            full_url = f"https://www.yad2.co.il{href}" if href.startswith('/') else href
+            # Remove query parameters
+            data['url'] = full_url.split('?')[0]
         
         # Extract image URL
         img_elem = item.find('img', attrs={'data-testid': 'image'})

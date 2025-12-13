@@ -5,13 +5,12 @@ import requests
 import time
 import random
 import traceback
-from typing import List, Dict, Optional
-from pathlib import Path
+from typing import List, Dict
 from datetime import datetime
-from .config import (
+from scraper.config import (
     RENT_URL, USER_AGENTS, get_headers, HEADER_PRESETS,
     REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, 
-    TIMEOUT, MAX_RETRIES, MAX_RETRIES_PER_PAGE, OUTPUT_DIR, DEGUG_MODE
+    TIMEOUT, MAX_RETRIES, MAX_RETRIES_PER_PAGE, OUTPUT_DIR, DEBUG_MODE
 )
 from .parser import Yad2Parser
 
@@ -29,7 +28,7 @@ class Yad2Scraper:
         """
         self.db_manager = db_manager
         self.session = requests.Session()
-        self.save_html = DEGUG_MODE
+        self.save_html = DEBUG_MODE
         self.last_url = None  # Track last URL for referer header
         self.current_user_agent = random.choice(USER_AGENTS)
         self.current_header_preset = 0
@@ -37,6 +36,9 @@ class Yad2Scraper:
         # Metrics tracking
         self.total_pages_scraped = 0
         self.total_listings_inserted = 0
+        self.total_listings_new = 0
+        self.total_listings_updated = 0
+        self.total_listings_removed = 0
         self.total_captchas_encountered = 0
         self.total_session_rotations = 0
         self.start_time = None
@@ -354,6 +356,8 @@ class Yad2Scraper:
                     updated = result['updated']
                     total_processed = inserted + updated
                     self.total_listings_inserted += total_processed
+                    self.total_listings_new += inserted
+                    self.total_listings_updated += updated
                     self.total_pages_scraped += 1
                     
                     # Single-line log
@@ -394,6 +398,9 @@ class Yad2Scraper:
         return {
             'total_pages_scraped': self.total_pages_scraped,
             'total_listings_inserted': self.total_listings_inserted,
+            'total_listings_new': self.total_listings_new,
+            'total_listings_updated': self.total_listings_updated,
+            'total_listings_removed': self.total_listings_removed,
             'total_captchas_encountered': self.total_captchas_encountered,
             'total_session_rotations': self.total_session_rotations,
             'elapsed_time_seconds': elapsed_time,
@@ -409,7 +416,10 @@ class Yad2Scraper:
         print(f"SCRAPING SESSION SUMMARY")
         print(f"{'='*80}")
         print(f"Total Pages Scraped:        {summary['total_pages_scraped']}")
-        print(f"Total Listings Inserted:    {summary['total_listings_inserted']}")
+        print(f"Total Listings Processed:   {summary['total_listings_inserted']}")
+        print(f"  - New Listings:           {summary['total_listings_new']}")
+        print(f"  - Updated Listings:       {summary['total_listings_updated']}")
+        print(f"  - Removed Listings:       {summary['total_listings_removed']}")
         print(f"Average Listings/Page:      {summary['average_listings_per_page']:.2f}")
         print(f"CAPTCHAs Encountered:       {summary['total_captchas_encountered']}")
         print(f"Session Rotations:          {summary['total_session_rotations']}")

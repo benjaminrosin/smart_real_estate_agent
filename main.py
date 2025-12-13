@@ -3,9 +3,9 @@ Main entry point for the Yad2 scraper
 """
 import argparse
 from dotenv import load_dotenv
-from scraper import Yad2Scraper
-from db_manager import MongoDBManager
-from config import MAX_PAGES
+from scraper.scraper import Yad2Scraper
+from scraper.db_manager import MongoDBManager
+from scraper.config import MAX_PAGES
 import traceback
 
 # Load environment variables
@@ -47,8 +47,9 @@ def main():
         # Scrape listings (saves to DB page-by-page)
         scraper.scrape_rentals(max_pages=args.pages)
         
-    
-        db.cleanup_old_listings(days_threshold=2)
+        # Cleanup old listings and track removed count
+        removed_count = db.cleanup_old_listings(days_threshold=2)
+        scraper.total_listings_removed = removed_count
         
         print("\n✓ Scraping session complete!")
         

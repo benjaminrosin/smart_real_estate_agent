@@ -84,10 +84,10 @@ SCROLL_BEHAVIOR = True  # Scroll page to simulate human behavior
 MOUSE_MOVEMENT = True  # Simulate random mouse movements
 
 # Output settings
+DEBUG_MODE = False  # Save raw HTML of pages for debugging
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "data"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Scraping settings
-MAX_PAGES = None  # Maximum number of pages to scrape (set to None for all)
-DEGUG_MODE = False  # Save raw HTML of pages for debugging
+MAX_PAGES = 5  # Maximum number of pages to scrape (set to None for all)
