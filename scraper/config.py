@@ -4,6 +4,10 @@ Configuration settings for the Yad2 scraper
 import os
 from pathlib import Path
 
+# Telegram updates bot settings
+TELEGRAM_UPDATES_TOKEN = os.getenv("TELEGRAM_UPDATES_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
+
 # Base URL
 BASE_URL = "https://www.yad2.co.il"
 RENT_URL = f"{BASE_URL}/realestate/rent"
@@ -90,4 +94,4 @@ OUTPUT_DIR = PROJECT_ROOT / "data"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Scraping settings
-MAX_PAGES = 5  # Maximum number of pages to scrape (set to None for all)
+MAX_PAGES = None  # Maximum number of pages to scrape (set to None for all)

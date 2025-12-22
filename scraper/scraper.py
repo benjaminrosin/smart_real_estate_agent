@@ -7,11 +7,7 @@ import random
 import traceback
 from typing import List, Dict
 from datetime import datetime
-from scraper.config import (
-    RENT_URL, USER_AGENTS, get_headers, HEADER_PRESETS,
-    REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, 
-    TIMEOUT, MAX_RETRIES, MAX_RETRIES_PER_PAGE, OUTPUT_DIR, DEBUG_MODE
-)
+import scraper.config as config
 from .parser import Yad2Parser
 
 
@@ -28,9 +24,9 @@ class Yad2Scraper:
         """
         self.db_manager = db_manager
         self.session = requests.Session()
-        self.save_html = DEBUG_MODE
+        self.save_html = config.DEBUG_MODE
         self.last_url = None  # Track last URL for referer header
-        self.current_user_agent = random.choice(USER_AGENTS)
+        self.current_user_agent = random.choice(config.USER_AGENTS)
         self.current_header_preset = 0
         
         # Metrics tracking
@@ -45,7 +41,7 @@ class Yad2Scraper:
         
         if self.save_html:
             # Create debug directory
-            self.debug_dir = OUTPUT_DIR / "debug_html"
+            self.debug_dir = config.OUTPUT_DIR / "debug_html"
             self.debug_dir.mkdir(exist_ok=True, parents=True)
             self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             print(f"Debug mode: HTML pages will be saved to {self.debug_dir}")
@@ -65,10 +61,10 @@ class Yad2Scraper:
         
         # Select new User-Agent
         old_ua = self.current_user_agent
-        self.current_user_agent = random.choice([ua for ua in USER_AGENTS if ua != old_ua])
+        self.current_user_agent = random.choice([ua for ua in config.USER_AGENTS if ua != old_ua])
         
         # Rotate header preset
-        self.current_header_preset = (self.current_header_preset + 1) % len(HEADER_PRESETS)
+        self.current_header_preset = (self.current_header_preset + 1) % len(config.HEADER_PRESETS)
         
         # Increment counter
         self.total_session_rotations += 1
@@ -77,11 +73,11 @@ class Yad2Scraper:
     
     def _get_random_user_agent(self) -> str:
         """Get a random user agent from the pool"""
-        return random.choice(USER_AGENTS)
+        return random.choice(config.USER_AGENTS)
     
     def _get_random_delay(self) -> float:
         """Get a random delay between min and max"""
-        return random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX)
+        return random.uniform(config.REQUEST_DELAY_MIN, config.REQUEST_DELAY_MAX)
     
     def fetch_page(self, url: str, page_num: int = None, attempt: int = 1):
         """
@@ -99,11 +95,11 @@ class Yad2Scraper:
         
         try:
             # Build headers with current preset and user agent
-            headers = get_headers(referer=self.last_url, preset_index=self.current_header_preset)
+            headers = config.get_headers(referer=self.last_url, preset_index=self.current_header_preset)
             headers["User-Agent"] = self.current_user_agent
             
             # Make request
-            response = self.session.get(url, headers=headers, timeout=TIMEOUT)
+            response = self.session.get(url, headers=headers, timeout=config.TIMEOUT)
             
             # Check for blocks
             is_captcha = 'captcha' in response.text.lower() or 'challenge' in response.text.lower()
@@ -124,13 +120,13 @@ class Yad2Scraper:
                     block_type = "429 Rate Limit"
                     delays = [90, 120, 150]
                 
-                if attempt < MAX_RETRIES_PER_PAGE:
+                if attempt < config.MAX_RETRIES_PER_PAGE:
                     # Rotate session
                     self._rotate_session(reason=block_type)
                     
                     # Wait with escalating delay
                     wait_time = delays[attempt - 1]
-                    print(f"⚠️  {block_type} detected on page {page_num} (Attempt {attempt}/{MAX_RETRIES_PER_PAGE}) - Waiting {wait_time}s...")
+                    print(f"⚠️  {block_type} detected on page {page_num} (Attempt {attempt}/{config.MAX_RETRIES_PER_PAGE}) - Waiting {wait_time}s...")
                     time.sleep(wait_time)
                     
                     # Retry
@@ -156,9 +152,9 @@ class Yad2Scraper:
         except requests.exceptions.RequestException as e:
             print(f"✗ Network error fetching page {page_num}: {e}")
             
-            if attempt < MAX_RETRIES:
+            if attempt < config.MAX_RETRIES:
                 wait_time = attempt * 5
-                print(f"  Retrying in {wait_time}s... (attempt {attempt}/{MAX_RETRIES})")
+                print(f"  Retrying in {wait_time}s... (attempt {attempt}/{config.MAX_RETRIES})")
                 time.sleep(wait_time)
                 return self.fetch_page(url, page_num, attempt + 1)
             else:
@@ -284,7 +280,7 @@ class Yad2Scraper:
             raise ValueError("Database manager not provided. Pass db_manager to constructor.")
         
         self.start_time = datetime.now()
-        start_url = RENT_URL
+        start_url = config.RENT_URL
         
         # Get total pages from page 1
         print("Fetching first page to determine total pages...")
@@ -409,20 +405,26 @@ class Yad2Scraper:
     
     def _print_summary(self):
         """Print detailed summary of scraping session"""
+        summary = self._summary_to_string()
+        
+        print(f"\n{'='*80}")
+        print(summary)
+        print(f"{'='*80}\n")
+
+    def _summary_to_string(self) -> str:
+        """Convert summary to a formatted string"""
         summary = self.get_summary()
         elapsed_minutes = summary['elapsed_time_seconds'] / 60
         
-        print(f"\n{'='*80}")
-        print(f"SCRAPING SESSION SUMMARY")
-        print(f"{'='*80}")
-        print(f"Total Pages Scraped:        {summary['total_pages_scraped']}")
-        print(f"Total Listings Processed:   {summary['total_listings_inserted']}")
-        print(f"  - New Listings:           {summary['total_listings_new']}")
-        print(f"  - Updated Listings:       {summary['total_listings_updated']}")
-        print(f"  - Removed Listings:       {summary['total_listings_removed']}")
-        print(f"Average Listings/Page:      {summary['average_listings_per_page']:.2f}")
-        print(f"CAPTCHAs Encountered:       {summary['total_captchas_encountered']}")
-        print(f"Session Rotations:          {summary['total_session_rotations']}")
-        print(f"Total Time Elapsed:         {elapsed_minutes:.2f} minutes ({summary['elapsed_time_seconds']:.0f} seconds)")
-        print(f"{'='*80}\n")
+        return (
+            f"Scraping Summary:\n"
+            f"- Total Pages Scraped: {summary['total_pages_scraped']}\n"
+            f"- Total Listings Processed: {summary['total_listings_inserted']} "
+            f"(New: {summary['total_listings_new']}, Updated: {summary['total_listings_updated']})\n"
+            f"- Listings Removed: {summary['total_listings_removed']}\n"
+            f"- Average Listings/Page: {summary['average_listings_per_page']:.2f}\n"
+            f"- CAPTCHAs Encountered: {summary['total_captchas_encountered']}\n"
+            f"- Session Rotations: {summary['total_session_rotations']}\n"
+            f"- Total Time Elapsed: {elapsed_minutes:.2f} minutes ({summary['elapsed_time_seconds']:.0f} seconds)"
+        )
 

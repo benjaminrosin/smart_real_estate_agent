@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  scraper:
+    build: .
+    image: my-scraper:latest
+    container_name: daily_scraper
+    env_file:
+      - .env
+    restart: "no"
+    tty: true
+    stdin_open: true 
