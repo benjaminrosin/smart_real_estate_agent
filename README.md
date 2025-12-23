@@ -7,11 +7,18 @@ A Python web scraper for collecting rental property listings from yad2.co.il.
 - Scrapes rental property listings from Yad2.co.il
 - Extracts property details (price, address, rooms, etc.)
 - Rate limiting and retry logic for robust scraping
-- Saves data to CSV and/or JSON formats
+- Saves data Mongo DB
 - Configurable page limits
 
-## Installation
+## Usage
 
+### using Docker:
+```bash
+docker compose up -d --build
+```
+
+### Locally:
+#### Install:
 1. Activate the virtual environment:
 ```bash
 venv\Scripts\activate
@@ -22,9 +29,9 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Usage
+#### Run:
 
-Basic usage (scrape 5 pages, save to both CSV and JSON):
+Basic usage (scrape all pages):
 ```bash
 python main.py
 ```
@@ -33,15 +40,6 @@ Custom options:
 ```bash
 # Scrape 10 pages
 python main.py --pages 10
-
-# Save only as CSV
-python main.py --output csv
-
-# Save only as JSON
-python main.py --output json
-
-# Custom filename
-python main.py --filename my_listings
 ```
 
 ## Project Structure
@@ -49,14 +47,15 @@ python main.py --filename my_listings
 ```
 project/
 ├── scraper/
-│   ├── __init__.py      # Package initialization
 │   ├── config.py        # Configuration settings
 │   ├── scraper.py       # Main scraper logic
 │   ├── parser.py        # HTML parsing
-│   └── storage.py       # Data storage
-├── data/                # Output directory (created automatically)
+│   └── db_manager.py    # Data base manager
 ├── main.py              # CLI entry point
-└── requirements.txt     # Dependencies
+├── requirements.txt     # Dependencies
+├── .env                 # Environment variables
+├── Dockerfile           # Docker file to run the scraper
+└── Docker-compose.yml   # Docker orchestration
 ```
 
 ## Configuration
@@ -69,6 +68,5 @@ Edit `scraper/config.py` to adjust:
 
 ## Notes
 
-- The scraper respects rate limits with 2-second delays between requests
-- Output files are timestamped automatically
+- The scraper respects rate limits with 30-second delays between requests
 - The parser may need adjustments based on Yad2's HTML structure
