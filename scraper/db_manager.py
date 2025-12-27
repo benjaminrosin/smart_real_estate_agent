@@ -165,6 +165,7 @@ class MongoDBManager:
                     update_doc = listing.copy()
                     update_doc['last_seen'] = current_time
                     update_doc['updated_at'] = current_time
+                    update_doc['deleted'] = False
                     
                     # Merge features if both exist
                     if 'features' in update_doc and 'features' in existing:

@@ -425,6 +425,6 @@ class Yad2Scraper:
             f"- Average Listings/Page: {summary['average_listings_per_page']:.2f}\n"
             f"- CAPTCHAs Encountered: {summary['total_captchas_encountered']}\n"
             f"- Session Rotations: {summary['total_session_rotations']}\n"
-            f"- Total Time Elapsed: {elapsed_minutes:.2f} minutes ({summary['elapsed_time_seconds']:.0f} seconds)"
+            f"- Total Time Elapsed: {elapsed_minutes:.2f} minutes"
         )
 
