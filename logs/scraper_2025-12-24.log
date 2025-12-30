@@ -1,0 +1,74 @@
+time="2025-12-24T19:46:04Z" level=warning msg="/root/project/smart_real_estate_agent/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image my-scraper:latest Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 548B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 270B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 277B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.11-slim
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 7.63kB 0.0s done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#9 CACHED
+
+#10 [5/5] COPY . .
+#10 DONE 0.1s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 writing image sha256:f8aca74656847f6bd841bafdbf469083e525a4b23e5861b10488de5ee75eccc0
+#11 writing image sha256:f8aca74656847f6bd841bafdbf469083e525a4b23e5861b10488de5ee75eccc0 done
+#11 naming to docker.io/library/my-scraper:latest done
+#11 DONE 0.1s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image my-scraper:latest Built 
+ Container daily_scraper Creating 
+ Container daily_scraper Created 
+Attaching to daily_scraper
+ Container daily_scraper Starting 
+ Container daily_scraper Started 
+daily_scraper  | ================================================================================
+daily_scraper  | Yad2 Real Estate Scraper - MongoDB Edition
+daily_scraper  | ================================================================================
+daily_scraper  | Target: Rental properties
+daily_scraper  | Max pages: All
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | ✓ Connected to MongoDB Atlas - Database: yad2_scraper, Collection: listings
+daily_scraper  | Telegram update sent successfully.
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | Total pages available: 780, will scrape: 780
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: 780 pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 1 | Wait: 1s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | Status: OK
+ Compose Stopping Gracefully Stopping... press Ctrl+C again to force
+ Container daily_scraper Stopping 
+ Container daily_scraper Stopped 
+
