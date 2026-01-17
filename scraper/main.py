@@ -3,9 +3,9 @@ Main entry point for the Yad2 scraper
 """
 import argparse
 from dotenv import load_dotenv
-from scraper.scraper import Yad2Scraper
-from scraper.db_manager import MongoDBManager
-import scraper.config as config
+from src.scraper import Yad2Scraper
+from src.db_manager import MongoDBManager
+import src.config as config
 import traceback
 import requests
 

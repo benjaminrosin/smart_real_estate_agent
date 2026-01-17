@@ -89,7 +89,7 @@ MOUSE_MOVEMENT = True  # Simulate random mouse movements
 
 # Output settings
 DEBUG_MODE = False  # Save raw HTML of pages for debugging
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "data"
 OUTPUT_DIR.mkdir(exist_ok=True)
 

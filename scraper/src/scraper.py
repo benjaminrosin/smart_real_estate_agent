@@ -7,7 +7,7 @@ import random
 import traceback
 from typing import List, Dict
 from datetime import datetime
-import scraper.config as config
+import src.config as config
 from .parser import Yad2Parser
 
 
