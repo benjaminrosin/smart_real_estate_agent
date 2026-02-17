@@ -266,12 +266,13 @@ class Yad2Scraper:
         print(f"\n=== Scraping complete: {len(all_listings)} total listings from {page_count} pages ===")
         return all_listings
     
-    def scrape_rentals(self, max_pages: int = None):
+    def scrape_rentals(self, start_url: str, max_pages: int = None):
         """
         Scrape rental listings from Yad2 and save to database page-by-page
         
         Args:
             max_pages: Maximum number of pages to scrape
+            start_url: URL to start scraping from (default is config.RENT_URL)
             
         Returns:
             None - saves directly to database
@@ -280,7 +281,7 @@ class Yad2Scraper:
             raise ValueError("Database manager not provided. Pass db_manager to constructor.")
         
         self.start_time = datetime.now()
-        start_url = config.RENT_URL
+        start_url = start_url
         
         # Get total pages from page 1
         print("Fetching first page to determine total pages...")

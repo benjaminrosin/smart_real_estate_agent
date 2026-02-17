@@ -153,12 +153,13 @@ class MongoDBManager:
         for listing in listings:
             try:
                 url = listing.get('url')
-                if not url:
+                oid = url.split('/')[-1] if url else None
+                if not url or not oid:
                     error_count += 1
                     continue
                 
                 # Check if listing exists
-                existing = self.collection.find_one({'_id': url})
+                existing = self.collection.find_one({'_id': oid})
                 
                 if existing:
                     # Update existing listing
@@ -179,14 +180,14 @@ class MongoDBManager:
                     update_doc.pop('_id', None)
                     
                     self.collection.update_one(
-                        {'_id': url},
+                        {'_id': oid},
                         {'$set': update_doc}
                     )
                     updated_count += 1
                 else:
                     # Insert new listing with URL as _id
                     insert_doc = listing.copy()
-                    insert_doc['_id'] = url
+                    insert_doc['_id'] = oid
                     insert_doc['first_seen'] = current_time
                     insert_doc['last_seen'] = current_time
                     insert_doc['scraped_at'] = current_time

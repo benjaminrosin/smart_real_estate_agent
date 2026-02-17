@@ -9,14 +9,11 @@ import src.config as config
 import traceback
 import requests
 
-# Load environment variables
-load_dotenv()
-
 def send_telegram_update(message: str):
     """Send a Telegram message using bot token and chat ID from environment variables"""
 
     if not config.TELEGRAM_UPDATES_TOKEN or not config.CHAT_ID:
-        print("Telegram bot token or chat ID not set in environment variables.")
+        print(f"Telegram bot token or chat ID not set in environment variables. {config.TELEGRAM_UPDATES_TOKEN=}, {config.CHAT_ID=}")
         return
     
     url = f"https://api.telegram.org/bot{config.TELEGRAM_UPDATES_TOKEN}/sendMessage"
@@ -70,10 +67,21 @@ def main():
 
         # Initialize scraper with DB connection
         scraper = Yad2Scraper(db_manager=db)
-        
-        # Scrape listings (saves to DB page-by-page)
-        scraper.scrape_rentals(max_pages=args.pages)
-        
+        total_listings = 0
+
+        for area in config.AREAS:
+            print(f"\n🔍 Starting scrape for area: {area}")
+            if config.TELEGRAM_VERBOSE_UPDATES:
+                send_telegram_update(f"🔍 Starting scrape for area: {area}")
+            area_url = f"{config.RENT_URL}/{area}"
+
+            # Scrape listings (saves to DB page-by-page)
+            scraper.scrape_rentals(start_url=area_url, max_pages=args.pages)
+            
+            if config.TELEGRAM_VERBOSE_UPDATES:
+                send_telegram_update(f"✅ Completed scrape for area: {area}, total listings for area: {scraper.total_listings_inserted - total_listings}")
+                total_listings = scraper.total_listings_inserted
+
         # Cleanup old listings and track removed count
         removed_count = db.cleanup_old_listings(days_threshold=2)
         scraper.total_listings_removed = removed_count
@@ -98,4 +106,5 @@ def main():
 
 
 if __name__ == "__main__":
+    load_dotenv()  # Load environment variables before running main
     main()

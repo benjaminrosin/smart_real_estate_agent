@@ -3,14 +3,28 @@ Configuration settings for the Yad2 scraper
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Telegram updates bot settings
 TELEGRAM_UPDATES_TOKEN = os.getenv("TELEGRAM_UPDATES_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
+TELEGRAM_VERBOSE_UPDATES = True
 
 # Base URL
 BASE_URL = "https://www.yad2.co.il"
 RENT_URL = f"{BASE_URL}/realestate/rent"
+AREAS = [
+    "center-and-sharon",
+    "tel-aviv-area",
+    "jerusalem-area",
+    "partnership/east",
+    "north-and-valleys",
+    "coastal-north",
+    "south",
+]
 
 # User agents to rotate (appear as different browsers)
 USER_AGENTS = [
