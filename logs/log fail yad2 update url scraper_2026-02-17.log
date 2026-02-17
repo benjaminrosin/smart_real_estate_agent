@@ -1,0 +1,86 @@
+time="2026-02-17T02:00:01Z" level=warning msg="/root/project/smart_real_estate_agent/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image my-scraper:latest Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 564B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 270B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.11-slim
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 281B done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#9 CACHED
+
+#10 [5/5] COPY . .
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:4de6ab1a7cb8418e9e217a8c3a33ca8e7900f9f98592e42573070886dc3bd267 done
+#11 naming to docker.io/library/my-scraper:latest done
+#11 DONE 0.0s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image my-scraper:latest Built 
+Attaching to daily_scraper
+ Container daily_scraper Starting 
+ Container daily_scraper Started 
+daily_scraper  | ================================================================================
+daily_scraper  | Yad2 Real Estate Scraper - MongoDB Edition
+daily_scraper  | ================================================================================
+daily_scraper  | Target: Rental properties
+daily_scraper  | Max pages: All
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | ✓ Connected to MongoDB Atlas - Database: yad2_scraper, Collection: listings
+daily_scraper  | Telegram update sent successfully.
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: None pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 1 | Wait: 0s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Scraping Summary:
+daily_scraper  | - Total Pages Scraped: 0
+daily_scraper  | - Total Listings Processed: 0 (New: 0, Updated: 0)
+daily_scraper  | - Listings Removed: 0
+daily_scraper  | - Average Listings/Page: 0.00
+daily_scraper  | - CAPTCHAs Encountered: 0
+daily_scraper  | - Session Rotations: 0
+daily_scraper  | - Total Time Elapsed: 0.01 minutes
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | ✓ No listings to mark as deleted
+daily_scraper  | 
+daily_scraper  | ✓ Scraping session complete!
+daily_scraper  | Telegram update sent successfully.
+daily_scraper  | ✓ Disconnected from MongoDB
+[Kdaily_scraper exited with code 0
+ Compose Stopping Aborting on container exit...
+ Container daily_scraper Stopping 
+ Container daily_scraper Stopped 
