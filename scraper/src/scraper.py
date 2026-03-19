@@ -35,6 +35,7 @@ class Yad2Scraper:
         self.total_listings_new = 0
         self.total_listings_updated = 0
         self.total_listings_removed = 0
+        self.total_validation_failures = 0
         self.total_captchas_encountered = 0
         self.total_session_rotations = 0
         self.start_time = None
@@ -351,14 +352,16 @@ class Yad2Scraper:
                     result = self.db_manager.upsert_listings(listings)
                     inserted = result['inserted']
                     updated = result['updated']
+                    validation_failed = result.get('validation_failed', 0)
                     total_processed = inserted + updated
                     self.total_listings_inserted += total_processed
                     self.total_listings_new += inserted
                     self.total_listings_updated += updated
+                    self.total_validation_failures += validation_failed
                     self.total_pages_scraped += 1
                     
                     # Single-line log
-                    print(f"Page {page_num} | Wait: {wait_time}s | Listings: {listings_count} | CAPTCHA: {captcha_status} | New: {inserted} | Updated: {updated} | Status: OK")
+                    print(f"Page {page_num} | Wait: {wait_time}s | Listings: {listings_count} | CAPTCHA: {captcha_status} | New: {inserted} | Updated: {updated} | ValidationFailed: {validation_failed} | Status: OK")
                 else:
                     print(f"Page {page_num} | Wait: {wait_time}s | Listings: 0 | CAPTCHA: {captcha_status} | Status: NO_LISTINGS")
                     
@@ -398,6 +401,7 @@ class Yad2Scraper:
             'total_listings_new': self.total_listings_new,
             'total_listings_updated': self.total_listings_updated,
             'total_listings_removed': self.total_listings_removed,
+            'total_validation_failures': self.total_validation_failures,
             'total_captchas_encountered': self.total_captchas_encountered,
             'total_session_rotations': self.total_session_rotations,
             'elapsed_time_seconds': elapsed_time,
@@ -422,6 +426,7 @@ class Yad2Scraper:
             f"- Total Pages Scraped: {summary['total_pages_scraped']}\n"
             f"- Total Listings Processed: {summary['total_listings_inserted']} "
             f"(New: {summary['total_listings_new']}, Updated: {summary['total_listings_updated']})\n"
+            f"- Validation Failures: {summary['total_validation_failures']}\n"
             f"- Listings Removed: {summary['total_listings_removed']}\n"
             f"- Average Listings/Page: {summary['average_listings_per_page']:.2f}\n"
             f"- CAPTCHAs Encountered: {summary['total_captchas_encountered']}\n"
