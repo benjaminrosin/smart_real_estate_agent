@@ -47,6 +47,7 @@ class MongoDBManager:
             self.client.admin.command('ping')
             self.db = self.client[self.database_name]
             self.collection = self.db[collection_name]
+            self._ensure_indexes()
             self._connected = True
             print(f"✓ Connected to MongoDB Atlas - Database: {self.database_name}, Collection: {collection_name}")
             return True
@@ -58,6 +59,60 @@ class MongoDBManager:
             print(f"✗ Unexpected error during connection: {e}")
             self._connected = False
             return False
+
+    def _ensure_indexes(self):
+        """Create search-oriented indexes used by the real-estate agent queries."""
+        try:
+            # Single-field indexes
+            self.collection.create_index([('price_nis', 1)])
+            self.collection.create_index([('rooms', 1)])
+            self.collection.create_index([('size_sqm', 1)])
+            self.collection.create_index([('city_norm', 1)])
+            self.collection.create_index([('neighborhood_norm', 1)])
+            self.collection.create_index([('property_type', 1)])
+            self.collection.create_index([('last_seen', -1)])
+            self.collection.create_index([('deleted', 1)])
+
+            # Compound indexes for common search combinations
+            self.collection.create_index([('city_norm', 1), ('rooms', 1), ('price_nis', 1)])
+            self.collection.create_index([('city_norm', 1), ('neighborhood_norm', 1), ('price_nis', 1)])
+            self.collection.create_index([('property_type', 1), ('price_per_sqm', 1)])
+
+            # Geo index for coordinate enrichment stage
+            self.collection.create_index([('location_point', '2dsphere')])
+        except Exception as e:
+            print(f"✗ Error creating default indexes: {e}")
+
+    def _validate_listing_schema(self, listing: Dict[str, Any]) -> bool:
+        """Hybrid strict validation: enforce core fields, allow nullable optional numerics."""
+        url = listing.get('url')
+        city = listing.get('city_norm') or listing.get('city')
+        property_type = listing.get('property_type')
+
+        if not url or not city or not property_type:
+            return False
+
+        numeric_fields = ['price_nis', 'price', 'rooms', 'floor', 'size_sqm', 'price_per_sqm']
+        for field in numeric_fields:
+            value = listing.get(field)
+            if value is None:
+                continue
+            if not isinstance(value, (int, float)):
+                return False
+
+        location_point = listing.get('location_point')
+        if location_point is not None:
+            if not isinstance(location_point, dict):
+                return False
+            if location_point.get('type') != 'Point':
+                return False
+            coords = location_point.get('coordinates')
+            if not isinstance(coords, list) or len(coords) != 2:
+                return False
+            if not all(isinstance(v, (int, float)) for v in coords):
+                return False
+
+        return True
     
     def disconnect(self):
         """Close MongoDB connection"""
@@ -138,15 +193,16 @@ class MongoDBManager:
         """
         if not self._connected:
             print("✗ Not connected to database")
-            return {'inserted': 0, 'updated': 0, 'errors': 0}
+            return {'inserted': 0, 'updated': 0, 'errors': 0, 'validation_failed': 0}
         
         if not listings:
             print("✗ No listings to upsert")
-            return {'inserted': 0, 'updated': 0, 'errors': 0}
+            return {'inserted': 0, 'updated': 0, 'errors': 0, 'validation_failed': 0}
         
         inserted_count = 0
         updated_count = 0
         error_count = 0
+        validation_failed = 0
         
         current_time = datetime.utcnow()
         
@@ -156,6 +212,10 @@ class MongoDBManager:
                 oid = url.split('/')[-1] if url else None
                 if not url or not oid:
                     error_count += 1
+                    continue
+
+                if not self._validate_listing_schema(listing):
+                    validation_failed += 1
                     continue
                 
                 # Check if listing exists
@@ -201,7 +261,14 @@ class MongoDBManager:
                 error_count += 1
         
         print(f"✓ Inserted: {inserted_count}, Updated: {updated_count}, Errors: {error_count}")
-        return {'inserted': inserted_count, 'updated': updated_count, 'errors': error_count}
+        if validation_failed > 0:
+            print(f"⚠ Validation failed for {validation_failed} listings")
+        return {
+            'inserted': inserted_count,
+            'updated': updated_count,
+            'errors': error_count,
+            'validation_failed': validation_failed
+        }
     
     # READ operations
     

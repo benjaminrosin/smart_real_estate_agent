@@ -11,7 +11,7 @@ load_dotenv()
 # Telegram updates bot settings
 TELEGRAM_UPDATES_TOKEN = os.getenv("TELEGRAM_UPDATES_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
-TELEGRAM_VERBOSE_UPDATES = True
+TELEGRAM_VERBOSE_UPDATES = False  # Set to True to enable verbose logging of updates
 
 # Base URL
 BASE_URL = "https://www.yad2.co.il"
@@ -109,3 +109,49 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 # Scraping settings
 MAX_PAGES = None  # Maximum number of pages to scrape (set to None for all)
+
+# Parsing and normalization settings
+NORMALIZE_LISTINGS = True
+
+# Canonical property types (Hebrew-first strategy)
+PROPERTY_TYPE_SYNONYMS = {
+    "דירה": "דירה",
+    "דירת גן": "דירת גן",
+    "גג": "פנטהאוז",
+    "פנטהאוז": "פנטהאוז",
+    "גג/ פנטהאוז": "פנטהאוז",
+    "בית": "בית",
+    "בית פרטי": "בית",
+    "וילה": "וילה",
+    "סטודיו": "סטודיו",
+    "לופט": "לופט",
+    "יחידת דיור": "יחידת דיור",
+    "דופלקס": "דופלקס",
+    "טריפלקס": "טריפלקס",
+    "מחסן": "מחסן"
+}
+
+# Feature synonym mapping to improve faceted filtering
+FEATURE_SYNONYMS = {
+    "ממד": "ממ\"ד",
+    "ממ״ד": "ממ\"ד",
+    "ממ\"ד": "ממ\"ד",
+    "חניה פרטית": "חניה",
+    "חניה מקורה": "חניה",
+    "חניה": "חניה",
+    "מרפסת שמש": "מרפסת",
+    "מרפסת": "מרפסת",
+    "מעלית": "מעלית",
+    "מזגן": "מיזוג",
+    "מיזוג": "מיזוג",
+    "מחסן": "מחסן",
+    "משופצת": "משופצת",
+    "משופץ": "משופצת",
+    "נגישות": "נגישות",
+    "נגיש לנכים": "נגישות"
+}
+
+# Geocoding enrichment settings (staged; enrichment runs in background process)
+ENABLE_GEOCODING_ENRICHMENT = False
+GEOCODING_PROVIDER = os.getenv("GEOCODING_PROVIDER", "nominatim")
+GEOCODING_MIN_CONFIDENCE = float(os.getenv("GEOCODING_MIN_CONFIDENCE", "0.6"))

@@ -4,6 +4,7 @@ HTML parser for extracting property data from Yad2 pages
 from bs4 import BeautifulSoup
 from typing import List, Dict, Optional
 import re
+import src.config as config
 
 
 class Yad2Parser:
@@ -71,7 +72,11 @@ class Yad2Parser:
         # Extract price
         price_elem = item.find(attrs={'data-testid': 'price'})
         if price_elem:
-            data['price'] = self._clean_text(price_elem.get_text())
+            price_raw = self._clean_text(price_elem.get_text())
+            data['price_raw'] = price_raw
+            data['price_nis'] = self._parse_price_nis(price_raw)
+            # Keep `price` numeric for range queries in Mongo.
+            data['price'] = data['price_nis']
         
         # Extract street name and building number
         street_elem = item.find(attrs={'data-testid': 'street-name'})
@@ -95,7 +100,8 @@ class Yad2Parser:
             parts = [p.strip() for p in info_text.split(',')]
             
             if len(parts) >= 1:
-                data['property_type'] = parts[0]
+                data['property_type_raw'] = parts[0]
+                data['property_type'] = self._normalize_property_type(parts[0])
             if len(parts) >= 2:
                 # Second part might be neighborhood, could contain commas
                 # If there are more than 3 parts, combine middle parts as neighborhood
@@ -108,6 +114,11 @@ class Yad2Parser:
                     # More than 3 parts: first is type, last is city, rest is neighborhood
                     data['neighborhood'] = ', '.join(parts[1:-1])
                     data['city'] = parts[-1]
+
+            if data.get('city'):
+                data['city_norm'] = self._normalize_text_token(data['city'])
+            if data.get('neighborhood'):
+                data['neighborhood_norm'] = self._normalize_text_token(data['neighborhood'])
         
         # Extract rooms, floor, and size from second info line
         info_line_2 = item.find(attrs={'data-testid': 'item-info-line-2nd'})
@@ -120,24 +131,18 @@ class Yad2Parser:
             for part in parts:
                 # Check for rooms (contains "חדרים" or "rooms")
                 if 'חדר' in part or 'room' in part.lower():
-                    # Extract number
-                    room_match = re.search(r'\d+', part)
-                    if room_match:
-                        data['rooms'] = room_match.group()
+                    data['rooms_raw'] = part
+                    data['rooms'] = self._parse_rooms(part)
                 
                 # Check for floor (contains "קומה" or "floor")
                 elif 'קומה' in part or 'floor' in part.lower():
-                    # Extract number
-                    floor_match = re.search(r'\d+', part)
-                    if floor_match:
-                        data['floor'] = floor_match.group()
+                    data['floor_raw'] = part
+                    data['floor'] = self._parse_floor(part)
                 
                 # Check for size (contains "מ״ר" or "m²" or "sqm")
                 elif 'מ״ר' in part or 'm²' in part or 'sqm' in part.lower():
-                    # Extract number
-                    size_match = re.search(r'\d+', part)
-                    if size_match:
-                        data['size_sqm'] = size_match.group()
+                    data['size_sqm_raw'] = part
+                    data['size_sqm'] = self._parse_size_sqm(part)
         
         # Extract features/tags
         tags_box = item.find(attrs={'data-testid': 'item-tags-box'})
@@ -149,9 +154,124 @@ class Yad2Parser:
                     tags.append(tag_text)
             if tags:
                 data['features'] = tags
+                data['features_norm'] = self._normalize_features(tags)
+
+        # Derived analytics for search/ranking.
+        if data.get('price_nis') is not None and data.get('size_sqm'):
+            data['price_per_sqm'] = round(data['price_nis'] / data['size_sqm'], 2)
+
+        feature_set = set(data.get('features_norm', []))
+        data['has_elevator'] = 'מעלית' in feature_set
+        data['has_parking'] = 'חניה' in feature_set
+        data['has_mamad'] = 'ממ"ד' in feature_set
+
+        # Build a stable address key for staged geocoding enrichment.
+        address_parts = [
+            data.get('city_norm'),
+            data.get('neighborhood_norm'),
+            self._normalize_text_token(data.get('street')), 
+            data.get('building_number')
+        ]
+        address_parts = [p for p in address_parts if p]
+        if address_parts:
+            data['location_key'] = '|'.join(address_parts)
+            data['geocode_status'] = 'pending'
         
         # Only return if we got at least some data
         return data if len(data) > 0 else None
+
+    def _parse_price_nis(self, text: str) -> Optional[int]:
+        """Parse a price string like '₪ 5,000' into integer NIS."""
+        if not text:
+            return None
+
+        normalized = text.replace(',', '')
+        match = re.search(r'\d+', normalized)
+        if not match:
+            return None
+
+        try:
+            return int(match.group(0))
+        except (TypeError, ValueError):
+            return None
+
+    def _parse_rooms(self, text: str) -> Optional[float]:
+        """Parse room count and support half-room values like 4.5."""
+        if not text:
+            return None
+
+        normalized = text.replace(',', '.').replace('½', '.5')
+        match = re.search(r'\d+(?:\.\d+)?', normalized)
+        if not match:
+            return None
+
+        try:
+            return float(match.group(0))
+        except (TypeError, ValueError):
+            return None
+
+    def _parse_floor(self, text: str) -> Optional[int]:
+        """Parse floor and map textual values to numeric placeholders."""
+        if not text:
+            return None
+
+        lowered = text.lower()
+        if 'קרקע' in lowered or 'ground' in lowered:
+            return 0
+        if 'מרתף' in lowered or 'basement' in lowered:
+            return -1
+
+        match = re.search(r'-?\d+', text)
+        if not match:
+            return None
+
+        try:
+            return int(match.group(0))
+        except (TypeError, ValueError):
+            return None
+
+    def _parse_size_sqm(self, text: str) -> Optional[int]:
+        """Parse size in square meters."""
+        if not text:
+            return None
+
+        match = re.search(r'\d+', text.replace(',', ''))
+        if not match:
+            return None
+
+        try:
+            return int(match.group(0))
+        except (TypeError, ValueError):
+            return None
+
+    def _normalize_property_type(self, text: str) -> str:
+        """Normalize property type using a synonym map, preserving Hebrew canonical values."""
+        cleaned = self._normalize_text_token(text)
+        if not cleaned:
+            return text
+        return config.PROPERTY_TYPE_SYNONYMS.get(cleaned, cleaned)
+
+    def _normalize_features(self, tags: List[str]) -> List[str]:
+        """Normalize feature tags and deduplicate while preserving order."""
+        normalized = []
+        seen = set()
+        for tag in tags:
+            token = self._normalize_text_token(tag)
+            token = config.FEATURE_SYNONYMS.get(token, token)
+            if token and token not in seen:
+                normalized.append(token)
+                seen.add(token)
+        return normalized
+
+    def _normalize_text_token(self, text: Optional[str]) -> Optional[str]:
+        """Normalize text for faceted filtering and key generation."""
+        if not text:
+            return None
+
+        cleaned = self._clean_text(text)
+        cleaned = cleaned.replace('״', '"').replace('׳', "'")
+        cleaned = re.sub(r'\s+', ' ', cleaned)
+        return cleaned.strip().lower() if cleaned else None
     
     def _clean_text(self, text: str) -> str:
         """

@@ -42,6 +42,26 @@ Custom options:
 python main.py --pages 10
 ```
 
+### Schema migration for normalized fields
+
+Run this after pulling parser/schema updates so old listings match the new searchable fields.
+
+From the `scraper` folder:
+
+```bash
+# Preview changes only
+python migrate_normalized_fields.py --dry-run
+
+# Apply migration to all documents
+python migrate_normalized_fields.py
+
+# Optional: migrate only a subset while testing
+python migrate_normalized_fields.py --limit 500
+
+# Optional: enforce strict schema validation while migrating
+python migrate_normalized_fields.py --strict-validation
+```
+
 ## Project Structure
 
 ```
