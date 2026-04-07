@@ -1,0 +1,14 @@
+# Telegram Bot
+pyTelegramBotAPI>=4.14.0
+
+# Database
+pymongo>=4.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# LangChain + Gemini
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+langchain-mongodb>=0.3.0

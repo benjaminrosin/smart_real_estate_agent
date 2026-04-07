@@ -8,6 +8,24 @@ services:
     container_name: daily_scraper
     env_file:
       - ./scraper/.env
+    volumes:
+      - ./data:/app/data
     restart: "no"
     tty: true
-    stdin_open: true 
+    stdin_open: true
+    profiles:
+      - scraper
+      - all
+
+  chat:
+    build:
+      context: ./chat
+      dockerfile: Dockerfile
+    image: rental-chatbot:latest
+    container_name: telegram_chatbot
+    env_file:
+      - ./chat/.env
+    restart: unless-stopped
+    profiles:
+      - chat
+      - all 
