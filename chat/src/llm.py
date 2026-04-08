@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 # System prompt for the real estate agent persona
 SYSTEM_PROMPT = """You are a friendly and knowledgeable real estate agent assistant helping users find rental properties in Israel.
 
+Primary language: Hebrew. Respond in Hebrew by default unless the user clearly asks for another language.
+
 Your role:
 - Help users understand what they're looking for in a rental property
 - Ask clarifying questions about their preferences (location, budget, size, amenities)
@@ -28,6 +30,8 @@ Your role:
 - If the user asks for listings, options, recommendations, or refinement (for example: "same area but cheaper"), proactively use the search tool.
 - Never invent listings. Concrete recommendations must come from tool results.
 - If essential constraints are missing, ask one short focused clarification question before searching.
+- After each search, present exactly one recommended listing in full detail.
+- After the recommended listing, suggest a few additional matching listings as short options.
 
 CRITICAL FORMATTING RULES - MUST FOLLOW EXACTLY:
 - ONLY use these Telegram-supported HTML tags:
@@ -108,7 +112,7 @@ def _truncate(value: Optional[str], length: int = 180) -> str:
 
 @tool
 def search_properties_from_context(
-    user_request: str,
+    user_request: str = "",
     city: Optional[str] = None,
     neighborhood: Optional[str] = None,
     property_type: Optional[str] = None,
@@ -123,6 +127,8 @@ def search_properties_from_context(
     has_mamad: Optional[bool] = None,
 ) -> str:
     """Search rental listings based on user preferences from the conversation context."""
+    normalized_user_request = (user_request or "").strip()
+
     filters: Dict[str, Any] = {
         "city": city,
         "neighborhood": neighborhood,
@@ -136,7 +142,7 @@ def search_properties_from_context(
         "has_parking": has_parking,
         "has_elevator": has_elevator,
         "has_mamad": has_mamad,
-        "user_request": user_request,
+        "user_request": normalized_user_request,
     }
 
     logger.info(
@@ -148,10 +154,10 @@ def search_properties_from_context(
         rooms_min,
         rooms_max,
     )
-    logger.debug("Search tool request excerpt=%s", _truncate(user_request))
+    logger.debug("Search tool request excerpt=%s", _truncate(normalized_user_request))
 
     result = listing_search.search(filters)
-    formatted = listing_search.format_for_telegram(result)
+    formatted = listing_search.format_search_response(result)
 
     logger.info(
         "Tool result: candidates=%s top_returned=%s relaxed=%s",
@@ -161,7 +167,10 @@ def search_properties_from_context(
     )
 
     tool_payload = {
-        "summary": formatted,
+        "summary": formatted.get("assistant_text"),
+        "primary_listing": formatted.get("primary_listing"),
+        "listing_cards": formatted.get("listing_cards", []),
+        "suggestions": formatted.get("suggestions", []),
         "used_filters": result.used_filters,
         "relaxed_filters": result.relaxed_filters,
         "total_candidates": result.total_candidates,
@@ -190,7 +199,7 @@ def get_session_history(session_id: str) -> MongoDBChatMessageHistory:
     )
 
 
-def chat(user_id: str, message: str) -> str:
+def chat(user_id: str, message: str) -> Dict[str, Any]:
     """
     Process a chat message with conversation history.
     
@@ -199,7 +208,7 @@ def chat(user_id: str, message: str) -> str:
         message: The user's message
         
     Returns:
-        AI response as a string
+        Structured response payload with text and optional listing card
     """
     session_id = str(user_id)
     history = get_session_history(session_id)
@@ -214,19 +223,41 @@ def chat(user_id: str, message: str) -> str:
         logger.debug("LLM first response tool_calls_count=%s", len(tool_calls))
 
         final_text: str
+        structured_response: Optional[Dict[str, Any]] = None
         if tool_calls:
             messages.append(first_response)
+            parsed_tool_payloads = []
             for call in tool_calls:
                 if call.get("name") != search_properties_from_context.name:
                     continue
                 logger.info("Executing tool call name=%s tool_call_id=%s", call.get("name"), call.get("id"))
-                tool_output = search_properties_from_context.invoke(call.get("args", {}))
+                tool_args = dict(call.get("args", {}) or {})
+                tool_args.setdefault("user_request", message)
+                tool_output = search_properties_from_context.invoke(tool_args)
+                try:
+                    parsed = json.loads(tool_output)
+                    if isinstance(parsed, dict):
+                        parsed_tool_payloads.append(parsed)
+                except Exception:
+                    logger.debug("Failed to parse tool output JSON", exc_info=True)
                 messages.append(
                     ToolMessage(content=tool_output, tool_call_id=call.get("id", "search_properties_tool"))
                 )
 
-            final_response = llm.invoke(messages)
-            final_text = _extract_text(final_response)
+            tool_payload = parsed_tool_payloads[-1] if parsed_tool_payloads else {}
+            assistant_text = tool_payload.get("summary")
+            primary_listing = tool_payload.get("primary_listing")
+            listing_cards = tool_payload.get("listing_cards", [])
+            if assistant_text:
+                final_text = str(assistant_text)
+                structured_response = {
+                    "text": final_text,
+                    "primary_listing": primary_listing,
+                    "listing_cards": listing_cards,
+                }
+            else:
+                final_response = llm.invoke(messages)
+                final_text = _extract_text(final_response)
         else:
             final_text = _extract_text(first_response)
     except Exception:
@@ -240,7 +271,14 @@ def chat(user_id: str, message: str) -> str:
     history.add_ai_message(final_text)
     logger.debug("History persisted session_id=%s response_excerpt=%s", session_id, _truncate(final_text))
 
-    return _sanitize_output(final_text)
+    if structured_response:
+        return structured_response
+
+    return {
+        "text": _sanitize_output(final_text),
+        "primary_listing": None,
+        "listing_cards": [],
+    }
 
 
 def clear_history(user_id: str) -> None:

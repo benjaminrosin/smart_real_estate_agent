@@ -3,6 +3,7 @@ Telegram Chat Bot for Real Estate Agent
 Handles user registration, settings, and message responses
 """
 import logging
+from typing import Any, Dict, List
 
 import telebot
 from telebot import custom_filters
@@ -49,6 +50,10 @@ bot = telebot.TeleBot(config.TELEGRAM_BOT_TOKEN, state_storage=state_storage)
 # Initialize database manager
 db = UserDBManager(config.MONGO_URI, config.DATABASE_NAME)
 
+# Per-chat cache for paging through the latest search results.
+LISTING_NEXT_CALLBACK = "listing_next"
+search_cards_cache: Dict[int, Dict[str, Any]] = {}
+
 # Add custom filters for state handling (MUST be before handler decorators)
 bot.add_custom_filter(custom_filters.StateFilter(bot))
 
@@ -93,6 +98,7 @@ def handle_clear(message):
     """Handle /clear command - clear conversation history"""
     chat_id = message.chat.id
     llm.clear_history(str(chat_id))
+    search_cards_cache.pop(chat_id, None)
     bot.send_message(chat_id, "🗑️ Conversation history cleared! Let's start fresh.")
 
 
@@ -147,6 +153,27 @@ def handle_change_name_callback(call):
     )
 
 
+@bot.callback_query_handler(func=lambda call: call.data == LISTING_NEXT_CALLBACK)
+def handle_next_listing_callback(call):
+    """Send the next listing card from the last cached search results."""
+    chat_id = call.message.chat.id
+    bot.answer_callback_query(call.id)
+
+    cache = search_cards_cache.get(chat_id)
+    if not cache:
+        bot.send_message(chat_id, "אין כרגע תוצאות שמורות. אפשר לשלוח שוב בקשת חיפוש.")
+        return
+
+    cards = cache.get("cards") or []
+    next_index = int(cache.get("next_index", 0))
+    if next_index >= len(cards):
+        bot.send_message(chat_id, "הצגתי את כל האפשרויות שיש כרגע. רוצה שאחפש עם סינון קצת אחר?")
+        return
+
+    _send_listing_card(chat_id, cards[next_index], next_index + 1, len(cards))
+    cache["next_index"] = next_index + 1
+
+
 # ============== State Handlers ==============
 
 @bot.message_handler(state="*")
@@ -196,6 +223,34 @@ def handle_name_input_logic(message):
         bot.send_message(chat_id, "❌ Failed to update name. Please try again later.")
 
 
+def _build_next_button_markup(has_more: bool) -> Any:
+    if not has_more:
+        return None
+    markup = telebot.types.InlineKeyboardMarkup(row_width=1)
+    markup.add(telebot.types.InlineKeyboardButton(text="להצעה הבאה", callback_data=LISTING_NEXT_CALLBACK))
+    return markup
+
+
+def _send_listing_card(chat_id: int, card: Dict[str, Any], index: int, total: int) -> None:
+    caption = str(card.get("caption") or "")
+    image_url = card.get("image_url")
+    has_more = index < total
+    markup = _build_next_button_markup(has_more)
+
+    if image_url:
+        try:
+            bot.send_photo(chat_id, image_url, caption=caption[:1024], parse_mode="HTML", reply_markup=markup)
+            return
+        except Exception as e:
+            logger.warning("Photo send failed, fallback to text chat_id=%s error=%s", chat_id, str(e))
+
+    if caption:
+        try:
+            bot.send_message(chat_id, caption, parse_mode="HTML", reply_markup=markup)
+        except Exception:
+            bot.send_message(chat_id, caption, reply_markup=markup)
+
+
 # ============== Default Message Handler ==============
 
 @bot.message_handler(func=lambda message: True)
@@ -220,23 +275,42 @@ def handle_message(message):
     try:
         # Get AI response with conversation history
         response = llm.chat(str(chat_id), message.text)
-        
-        # Split long messages (Telegram limit is 4096 chars)
-        if len(response) > 4096:
-            for i in range(0, len(response), 4096):
-                chunk = response[i:i+4096]
+
+        def _send_html_chunks(text: str) -> None:
+            if not text:
+                return
+            if len(text) > 4096:
+                for i in range(0, len(text), 4096):
+                    chunk = text[i:i + 4096]
+                    try:
+                        bot.send_message(chat_id, chunk, parse_mode="HTML")
+                    except Exception:
+                        bot.send_message(chat_id, chunk)
+            else:
                 try:
-                    bot.send_message(chat_id, chunk, parse_mode="HTML")
-                except Exception:
-                    # If HTML parsing fails, send as plain text
-                    bot.send_message(chat_id, chunk)
+                    bot.send_message(chat_id, text, parse_mode="HTML")
+                except Exception as e:
+                    bot.send_message(chat_id, text)
+                    logger.warning("HTML parse/send failed, sent plain text chat_id=%s error=%s", chat_id, str(e))
+
+        text = str(response.get("text", "")) if isinstance(response, dict) else str(response)
+        primary_listing = response.get("primary_listing") if isinstance(response, dict) else None
+        listing_cards = response.get("listing_cards", []) if isinstance(response, dict) else []
+
+        # Cache current search cards so the next button can page through them.
+        if listing_cards:
+            search_cards_cache[chat_id] = {"cards": listing_cards, "next_index": 1}
         else:
-            try:
-                bot.send_message(chat_id, response, parse_mode="HTML")
-            except Exception as e:
-                # If HTML parsing fails, send as plain text
-                bot.send_message(chat_id, response)
-                logger.warning("HTML parse/send failed, sent plain text chat_id=%s error=%s", chat_id, str(e))
+            search_cards_cache.pop(chat_id, None)
+
+        # Send one rich listing card (photo + formatted link) when available.
+        if isinstance(primary_listing, dict):
+            total = len(listing_cards) if listing_cards else 1
+            _send_listing_card(chat_id, primary_listing, 1, total)
+            # Avoid sending an additional summary message when a card is shown.
+            return
+
+        _send_html_chunks(text)
             
     except Exception as e:
         logger.exception("LLM handler error chat_id=%s error=%s", chat_id, str(e))
