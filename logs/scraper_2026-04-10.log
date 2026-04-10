@@ -1,0 +1,1723 @@
+time="2026-04-10T02:00:02Z" level=warning msg="/root/project/smart_real_estate_agent/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image my-scraper:latest Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 564B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 270B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.11-slim
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 361B 0.0s done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#9 CACHED
+
+#10 [5/5] COPY . .
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:d9b7d949e68c73b28763a638113acb24bb8ac1b1d8a57236fc1a707ca20d78af done
+#11 naming to docker.io/library/my-scraper:latest done
+#11 DONE 0.0s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image my-scraper:latest Built 
+Attaching to daily_scraper
+ Container daily_scraper Starting 
+ Container daily_scraper Started 
+daily_scraper  | ================================================================================
+daily_scraper  | Yad2 Real Estate Scraper - MongoDB Edition
+daily_scraper  | ================================================================================
+daily_scraper  | Target: Rental properties
+daily_scraper  | Max pages: All
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | ✓ Connected to MongoDB Atlas - Database: yad2_scraper, Collection: listings
+daily_scraper  | Telegram update sent successfully.
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: center-and-sharon
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | Total pages available: 188, will scrape: 188
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: 188 pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 1 | Wait: 1s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 2 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 3 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 4 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 5 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 6 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 7 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #1
+daily_scraper  | ⚠️  CAPTCHA detected on page 8 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 8 | Wait: 120s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 9 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 10 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 11 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 12 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 13 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #2
+daily_scraper  | ⚠️  CAPTCHA detected on page 14 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 14 | Wait: 119s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 15 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 16 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 17 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 18 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 19 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #3
+daily_scraper  | ⚠️  CAPTCHA detected on page 20 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 20 | Wait: 95s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 21 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 22 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 6, Updated: 14, Errors: 0
+daily_scraper  | Page 23 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 6 | Updated: 14 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 24 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 25 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #4
+daily_scraper  | ⚠️  CAPTCHA detected on page 26 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #5
+daily_scraper  | ⚠️  CAPTCHA detected on page 26 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 26 | Wait: 188s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 9, Updated: 11, Errors: 0
+daily_scraper  | Page 27 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 9 | Updated: 11 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 11, Updated: 9, Errors: 0
+daily_scraper  | Page 28 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 11 | Updated: 9 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 15, Updated: 5, Errors: 0
+daily_scraper  | Page 29 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 15 | Updated: 5 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 13, Updated: 7, Errors: 0
+daily_scraper  | Page 30 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 13 | Updated: 7 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 16, Updated: 4, Errors: 0
+daily_scraper  | Page 31 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 16 | Updated: 4 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #6
+daily_scraper  | ⚠️  CAPTCHA detected on page 32 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 11, Updated: 9, Errors: 0
+daily_scraper  | Page 32 | Wait: 117s | Listings: 20 | CAPTCHA: No | New: 11 | Updated: 9 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 33 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 13, Updated: 7, Errors: 0
+daily_scraper  | Page 34 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 13 | Updated: 7 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 35 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 36 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 7, Updated: 13, Errors: 0
+daily_scraper  | Page 37 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 7 | Updated: 13 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #7
+daily_scraper  | ⚠️  CAPTCHA detected on page 38 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 38 | Wait: 102s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 39 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 9, Updated: 11, Errors: 0
+daily_scraper  | Page 40 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 9 | Updated: 11 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 41 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 42 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 43 | Wait: 37s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #8
+daily_scraper  | ⚠️  CAPTCHA detected on page 44 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 44 | Wait: 101s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 45 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 46 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 47 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 48 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 49 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 50 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 51 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 52 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 53 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 54 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #9
+daily_scraper  | ⚠️  CAPTCHA detected on page 55 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 55 | Wait: 104s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 56 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 57 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 58 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 59 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 60 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #10
+daily_scraper  | ⚠️  CAPTCHA detected on page 61 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 61 | Wait: 100s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 62 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 63 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 64 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 65 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 66 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #11
+daily_scraper  | ⚠️  CAPTCHA detected on page 67 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 67 | Wait: 112s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 68 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 69 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 70 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 71 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 72 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #12
+daily_scraper  | ⚠️  CAPTCHA detected on page 73 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 73 | Wait: 95s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 74 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 75 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 76 | Wait: 30s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 77 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 78 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #13
+daily_scraper  | ⚠️  CAPTCHA detected on page 79 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 79 | Wait: 105s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 80 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 81 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 82 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 83 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 84 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #14
+daily_scraper  | ⚠️  CAPTCHA detected on page 85 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 85 | Wait: 97s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 86 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 87 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 88 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 89 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 90 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #15
+daily_scraper  | ⚠️  CAPTCHA detected on page 91 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 91 | Wait: 113s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 92 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 93 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 94 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 95 | Wait: 34s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 96 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #16
+daily_scraper  | ⚠️  CAPTCHA detected on page 97 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 97 | Wait: 113s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 98 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 99 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 100 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 101 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 102 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #17
+daily_scraper  | ⚠️  CAPTCHA detected on page 103 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 103 | Wait: 108s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 104 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 105 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 106 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 107 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 108 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #18
+daily_scraper  | ⚠️  CAPTCHA detected on page 109 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #19
+daily_scraper  | ⚠️  CAPTCHA detected on page 109 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 109 | Wait: 186s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 110 | Wait: 37s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 111 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 112 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 113 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 114 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #20
+daily_scraper  | ⚠️  CAPTCHA detected on page 115 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 115 | Wait: 116s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 116 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 117 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 118 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 119 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 120 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #21
+daily_scraper  | ⚠️  CAPTCHA detected on page 121 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 121 | Wait: 110s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 122 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 123 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 124 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 125 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 126 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #22
+daily_scraper  | ⚠️  CAPTCHA detected on page 127 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 127 | Wait: 115s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 128 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 129 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 130 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 131 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 132 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #23
+daily_scraper  | ⚠️  CAPTCHA detected on page 133 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 133 | Wait: 93s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 134 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 135 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 136 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 137 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 138 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #24
+daily_scraper  | ⚠️  CAPTCHA detected on page 139 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 139 | Wait: 106s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 140 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 141 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 142 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 143 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 144 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #25
+daily_scraper  | ⚠️  CAPTCHA detected on page 145 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 145 | Wait: 95s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 146 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 147 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 148 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 149 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 150 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #26
+daily_scraper  | ⚠️  CAPTCHA detected on page 151 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 151 | Wait: 107s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 152 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 153 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 154 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 155 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 156 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #27
+daily_scraper  | ⚠️  CAPTCHA detected on page 157 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 157 | Wait: 119s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 158 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 159 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 160 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 161 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 162 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #28
+daily_scraper  | ⚠️  CAPTCHA detected on page 163 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 163 | Wait: 112s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 164 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 165 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 166 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 167 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 168 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #29
+daily_scraper  | ⚠️  CAPTCHA detected on page 169 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #30
+daily_scraper  | ⚠️  CAPTCHA detected on page 169 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 169 | Wait: 202s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 170 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 171 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 14 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 14, Errors: 0
+daily_scraper  | Page 172 | Wait: 42s | Listings: 14 | CAPTCHA: No | New: 0 | Updated: 14 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 173 | Wait: 49s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 174 | Wait: 57s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #31
+daily_scraper  | ⚠️  CAPTCHA detected on page 175 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 175 | Wait: 119s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 176 | Wait: 39s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 177 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 178 | Wait: 47s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 179 | Wait: 41s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 180 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #32
+daily_scraper  | ⚠️  CAPTCHA detected on page 181 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #33
+daily_scraper  | ⚠️  CAPTCHA detected on page 181 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 181 | Wait: 203s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 182 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 183 | Wait: 36s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 184 | Wait: 37s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 185 | Wait: 53s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 186 | Wait: 41s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #34
+daily_scraper  | ⚠️  CAPTCHA detected on page 187 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 187 | Wait: 117s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 188 | Wait: 49s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Scraping Summary:
+daily_scraper  | - Total Pages Scraped: 172
+daily_scraper  | - Total Listings Processed: 3434 (New: 240, Updated: 3194)
+daily_scraper  | - Validation Failures: 0
+daily_scraper  | - Listings Removed: 0
+daily_scraper  | - Average Listings/Page: 19.97
+daily_scraper  | - CAPTCHAs Encountered: 34
+daily_scraper  | - Session Rotations: 34
+daily_scraper  | - Total Time Elapsed: 196.51 minutes
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: tel-aviv-area
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | Total pages available: 238, will scrape: 238
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: 238 pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 1 | Wait: 0s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 4, Updated: 16, Errors: 0
+daily_scraper  | Page 2 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 4 | Updated: 16 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 4, Updated: 16, Errors: 0
+daily_scraper  | Page 3 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 4 | Updated: 16 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 4 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 5 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #35
+daily_scraper  | ⚠️  CAPTCHA detected on page 6 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #36
+daily_scraper  | ⚠️  CAPTCHA detected on page 6 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 6 | Wait: 186s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 7 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 8 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 9 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 10 | Wait: 37s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 11 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #37
+daily_scraper  | ⚠️  CAPTCHA detected on page 12 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 12 | Wait: 111s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 13 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 14 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 15 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 16 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 4, Updated: 16, Errors: 0
+daily_scraper  | Page 17 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 4 | Updated: 16 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #38
+daily_scraper  | ⚠️  CAPTCHA detected on page 18 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 18 | Wait: 106s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 19 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 5, Updated: 15, Errors: 0
+daily_scraper  | Page 20 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 5 | Updated: 15 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 21 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 22 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 3, Updated: 17, Errors: 0
+daily_scraper  | Page 23 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 3 | Updated: 17 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #39
+daily_scraper  | ⚠️  CAPTCHA detected on page 24 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #40
+daily_scraper  | ⚠️  CAPTCHA detected on page 24 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 4, Updated: 16, Errors: 0
+daily_scraper  | Page 24 | Wait: 188s | Listings: 20 | CAPTCHA: No | New: 4 | Updated: 16 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 9, Updated: 11, Errors: 0
+daily_scraper  | Page 25 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 9 | Updated: 11 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 13, Updated: 7, Errors: 0
+daily_scraper  | Page 26 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 13 | Updated: 7 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 27 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 28 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 29 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #41
+daily_scraper  | ⚠️  CAPTCHA detected on page 30 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #42
+daily_scraper  | ⚠️  CAPTCHA detected on page 30 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 30 | Wait: 198s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 31 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 32 | Wait: 34s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 15, Updated: 5, Errors: 0
+daily_scraper  | Page 33 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 15 | Updated: 5 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 15, Updated: 5, Errors: 0
+daily_scraper  | Page 34 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 15 | Updated: 5 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 9, Updated: 11, Errors: 0
+daily_scraper  | Page 35 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 9 | Updated: 11 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #43
+daily_scraper  | ⚠️  CAPTCHA detected on page 36 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #44
+daily_scraper  | ⚠️  CAPTCHA detected on page 36 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 36 | Wait: 207s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 11, Updated: 9, Errors: 0
+daily_scraper  | Page 37 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 11 | Updated: 9 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 38 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 39 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 40 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 41 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #45
+daily_scraper  | ⚠️  CAPTCHA detected on page 42 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 42 | Wait: 100s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 43 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 44 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 45 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 46 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 47 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #46
+daily_scraper  | ⚠️  CAPTCHA detected on page 48 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 48 | Wait: 106s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 49 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 50 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 51 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 52 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 53 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #47
+daily_scraper  | ⚠️  CAPTCHA detected on page 54 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 54 | Wait: 100s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 55 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 56 | Wait: 37s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 57 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 58 | Wait: 47s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 59 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #48
+daily_scraper  | ⚠️  CAPTCHA detected on page 60 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 60 | Wait: 103s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 61 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 62 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 63 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 64 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 65 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #49
+daily_scraper  | ⚠️  CAPTCHA detected on page 66 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 66 | Wait: 102s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 67 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 68 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 69 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 70 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 71 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #50
+daily_scraper  | ⚠️  CAPTCHA detected on page 72 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 72 | Wait: 120s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 73 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 74 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 75 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 76 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 77 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #51
+daily_scraper  | ⚠️  CAPTCHA detected on page 78 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #52
+daily_scraper  | ⚠️  CAPTCHA detected on page 78 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 78 | Wait: 201s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 79 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 80 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 81 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 82 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 83 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #53
+daily_scraper  | ⚠️  CAPTCHA detected on page 84 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #54
+daily_scraper  | ⚠️  CAPTCHA detected on page 84 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 84 | Wait: 207s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 85 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 86 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 87 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 88 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 89 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #55
+daily_scraper  | ⚠️  CAPTCHA detected on page 90 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 90 | Wait: 105s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 91 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 92 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 93 | Wait: 53s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 94 | Wait: 56s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 95 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #56
+daily_scraper  | ⚠️  CAPTCHA detected on page 96 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 96 | Wait: 115s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 97 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 98 | Wait: 34s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 99 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 100 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 101 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #57
+daily_scraper  | ⚠️  CAPTCHA detected on page 102 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 102 | Wait: 113s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 103 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 104 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 105 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 106 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 107 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #58
+daily_scraper  | ⚠️  CAPTCHA detected on page 108 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 108 | Wait: 93s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 109 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 110 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 111 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 112 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 113 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #59
+daily_scraper  | ⚠️  CAPTCHA detected on page 114 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 114 | Wait: 103s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 115 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 116 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 117 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 118 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 119 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #60
+daily_scraper  | ⚠️  CAPTCHA detected on page 120 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 120 | Wait: 92s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 121 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 122 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 123 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 124 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 125 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #61
+daily_scraper  | ⚠️  CAPTCHA detected on page 126 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 126 | Wait: 115s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 127 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 128 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 129 | Wait: 58s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 130 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 10 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 10, Errors: 0
+daily_scraper  | Page 131 | Wait: 47s | Listings: 10 | CAPTCHA: No | New: 0 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #62
+daily_scraper  | ⚠️  CAPTCHA detected on page 132 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 132 | Wait: 112s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 133 | Wait: 46s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 134 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 135 | Wait: 53s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 136 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 137 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #63
+daily_scraper  | ⚠️  CAPTCHA detected on page 138 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 138 | Wait: 103s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 139 | Wait: 38s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 140 | Wait: 31s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 141 | Wait: 52s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 142 | Wait: 44s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 143 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #64
+daily_scraper  | ⚠️  CAPTCHA detected on page 144 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 144 | Wait: 114s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 145 | Wait: 38s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 146 | Wait: 46s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 147 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 148 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 149 | Wait: 47s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #65
+daily_scraper  | ⚠️  CAPTCHA detected on page 150 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 150 | Wait: 117s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 151 | Wait: 32s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 152 | Wait: 31s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 153 | Wait: 31s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 154 | Wait: 38s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 155 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #66
+daily_scraper  | ⚠️  CAPTCHA detected on page 156 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 156 | Wait: 116s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 157 | Wait: 47s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 158 | Wait: 51s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 159 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 160 | Wait: 49s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 161 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #67
+daily_scraper  | ⚠️  CAPTCHA detected on page 162 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 162 | Wait: 120s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 163 | Wait: 57s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 164 | Wait: 32s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 165 | Wait: 37s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 166 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 167 | Wait: 51s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #68
+daily_scraper  | ⚠️  CAPTCHA detected on page 168 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 168 | Wait: 97s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 169 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 170 | Wait: 47s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 171 | Wait: 56s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 172 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 173 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #69
+daily_scraper  | ⚠️  CAPTCHA detected on page 174 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 174 | Wait: 103s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 175 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 176 | Wait: 53s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 177 | Wait: 38s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 178 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 179 | Wait: 32s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #70
+daily_scraper  | ⚠️  CAPTCHA detected on page 180 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #71
+daily_scraper  | ⚠️  CAPTCHA detected on page 180 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 180 | Wait: 198s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 181 | Wait: 59s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 182 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 183 | Wait: 36s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 184 | Wait: 36s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 185 | Wait: 43s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #72
+daily_scraper  | ⚠️  CAPTCHA detected on page 186 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 186 | Wait: 96s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 187 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 188 | Wait: 42s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 189 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 190 | Wait: 38s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 191 | Wait: 59s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #73
+daily_scraper  | ⚠️  CAPTCHA detected on page 192 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 192 | Wait: 95s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 193 | Wait: 55s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 194 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 195 | Wait: 52s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 196 | Wait: 32s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 197 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #74
+daily_scraper  | ⚠️  CAPTCHA detected on page 198 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 198 | Wait: 97s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 199 | Wait: 33s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 200 | Wait: 42s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 201 | Wait: 42s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 202 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 203 | Wait: 44s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #75
+daily_scraper  | ⚠️  CAPTCHA detected on page 204 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 204 | Wait: 113s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 205 | Wait: 32s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 206 | Wait: 49s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 207 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 208 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 209 | Wait: 53s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #76
+daily_scraper  | ⚠️  CAPTCHA detected on page 210 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 210 | Wait: 110s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 211 | Wait: 60s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 212 | Wait: 41s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 213 | Wait: 37s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 214 | Wait: 37s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 215 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #77
+daily_scraper  | ⚠️  CAPTCHA detected on page 216 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 216 | Wait: 112s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 217 | Wait: 45s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 218 | Wait: 36s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 219 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 220 | Wait: 57s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 221 | Wait: 35s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #78
+daily_scraper  | ⚠️  CAPTCHA detected on page 222 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 222 | Wait: 102s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 223 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 224 | Wait: 42s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 225 | Wait: 31s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 226 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 227 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #79
+daily_scraper  | ⚠️  CAPTCHA detected on page 228 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 228 | Wait: 105s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 229 | Wait: 43s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 230 | Wait: 40s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 231 | Wait: 53s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 232 | Wait: 34s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 233 | Wait: 36s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #80
+daily_scraper  | ⚠️  CAPTCHA detected on page 234 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 234 | Wait: 103s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 235 | Wait: 44s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 236 | Wait: 48s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 237 | Wait: 57s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | Found 0 property listings
+daily_scraper  | Page 238 | Wait: 42s | Listings: 0 | CAPTCHA: No | Status: NO_LISTINGS
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Scraping Summary:
+daily_scraper  | - Total Pages Scraped: 303
+daily_scraper  | - Total Listings Processed: 6044 (New: 440, Updated: 5604)
+daily_scraper  | - Validation Failures: 0
+daily_scraper  | - Listings Removed: 0
+daily_scraper  | - Average Listings/Page: 19.95
+daily_scraper  | - CAPTCHAs Encountered: 80
+daily_scraper  | - Session Rotations: 80
+daily_scraper  | - Total Time Elapsed: 437.16 minutes
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: jerusalem-area
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | Total pages available: 38, will scrape: 38
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: 38 pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 1 | Wait: 0s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 4, Updated: 16, Errors: 0
+daily_scraper  | Page 2 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 4 | Updated: 16 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #81
+daily_scraper  | ⚠️  CAPTCHA detected on page 3 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 3 | Wait: 95s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 4 | Wait: 40s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 5 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 6 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 10, Updated: 10, Errors: 0
+daily_scraper  | Page 7 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 10 | Updated: 10 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 14, Updated: 6, Errors: 0
+daily_scraper  | Page 8 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 14 | Updated: 6 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #82
+daily_scraper  | ⚠️  CAPTCHA detected on page 9 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 9 | Wait: 100s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 10 | Wait: 51s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 11 | Wait: 60s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 12 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 13 | Wait: 39s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 14 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #83
+daily_scraper  | ⚠️  CAPTCHA detected on page 15 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #84
+daily_scraper  | ⚠️  CAPTCHA detected on page 15 (Attempt 2/3) - Waiting 90s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 15 | Wait: 187s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 16 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 17 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 18 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 19 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 20 | Wait: 59s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #85
+daily_scraper  | ⚠️  CAPTCHA detected on page 21 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 21 | Wait: 98s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 22 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 23 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 24 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 25 | Wait: 36s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 26 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #86
+daily_scraper  | ⚠️  CAPTCHA detected on page 27 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 27 | Wait: 100s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 28 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 29 | Wait: 35s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 30 | Wait: 42s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 31 | Wait: 49s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 32 | Wait: 30s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #87
+daily_scraper  | ⚠️  CAPTCHA detected on page 33 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 33 | Wait: 99s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 34 | Wait: 37s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 35 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 36 | Wait: 57s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 37 | Wait: 31s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 19 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 19, Errors: 0
+daily_scraper  | Page 38 | Wait: 41s | Listings: 19 | CAPTCHA: No | New: 0 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Scraping Summary:
+daily_scraper  | - Total Pages Scraped: 341
+daily_scraper  | - Total Listings Processed: 6803 (New: 494, Updated: 6309)
+daily_scraper  | - Validation Failures: 0
+daily_scraper  | - Listings Removed: 0
+daily_scraper  | - Average Listings/Page: 19.95
+daily_scraper  | - CAPTCHAs Encountered: 87
+daily_scraper  | - Session Rotations: 87
+daily_scraper  | - Total Time Elapsed: 475.48 minutes
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: partnership/east
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #88
+daily_scraper  | ⚠️  CAPTCHA detected on page 1 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Total pages available: 24, will scrape: 24
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Starting scraping session - Target: 24 pages
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 1 | Wait: 61s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 1, Updated: 19, Errors: 0
+daily_scraper  | Page 2 | Wait: 52s | Listings: 20 | CAPTCHA: No | New: 1 | Updated: 19 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 12, Updated: 8, Errors: 0
+daily_scraper  | Page 3 | Wait: 41s | Listings: 20 | CAPTCHA: No | New: 12 | Updated: 8 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 13, Updated: 7, Errors: 0
+daily_scraper  | Page 4 | Wait: 44s | Listings: 20 | CAPTCHA: No | New: 13 | Updated: 7 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 2, Updated: 18, Errors: 0
+daily_scraper  | Page 5 | Wait: 38s | Listings: 20 | CAPTCHA: No | New: 2 | Updated: 18 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 6 | Wait: 34s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 7 | Wait: 46s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #89
+daily_scraper  | ⚠️  CAPTCHA detected on page 8 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 8 | Wait: 102s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 9 | Wait: 32s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 10 | Wait: 50s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 11 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 12 | Wait: 48s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 13 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | 🔄 Session rotated (Reason: CAPTCHA) - Rotation #90
+daily_scraper  | ⚠️  CAPTCHA detected on page 14 (Attempt 1/3) - Waiting 60s...
+daily_scraper  | ✗ Network error fetching page 14: 500 Server Error: Internal Server Error for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=14
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 14 | Wait: 137s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 15 | Wait: 45s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 16 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | ✗ Network error fetching page 17: 500 Server Error: Internal Server Error for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=17
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 17 | Wait: 64s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | ✗ Network error fetching page 18: 500 Server Error: Internal Server Error for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=18
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 18 | Wait: 55s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 19 | Wait: 54s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 20 | Wait: 43s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 21 | Wait: 33s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | ✗ Network error fetching page 22: 500 Server Error: Internal Server Error for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=22
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 22: HTTPSConnectionPool(host='www.yad2.co.il', port=443): Read timed out. (read timeout=30)
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | ✗ Network error fetching page 22: 500 Server Error: Internal Server Error for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=22
+daily_scraper  | ✗ Max retries reached for page 22
+daily_scraper  | Page 22 | Status: FAILED | Skipping...
+daily_scraper  | ✗ Network error fetching page 23: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=23
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 23: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=23
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | Found 20 property listings
+daily_scraper  | ✓ Inserted: 0, Updated: 20, Errors: 0
+daily_scraper  | Page 23 | Wait: 83s | Listings: 20 | CAPTCHA: No | New: 0 | Updated: 20 | ValidationFailed: 0 | Status: OK
+daily_scraper  | ✗ Network error fetching page 24: 502 Server Error: Bad Gateway for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=24
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 24: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=24
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | ✗ Network error fetching page 24: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/partnership/east?page=24
+daily_scraper  | ✗ Max retries reached for page 24
+daily_scraper  | Page 24 | Status: FAILED | Skipping...
+daily_scraper  | 
+daily_scraper  | ================================================================================
+daily_scraper  | Scraping Summary:
+daily_scraper  | - Total Pages Scraped: 363
+daily_scraper  | - Total Listings Processed: 7243 (New: 522, Updated: 6721)
+daily_scraper  | - Validation Failures: 0
+daily_scraper  | - Listings Removed: 0
+daily_scraper  | - Average Listings/Page: 19.95
+daily_scraper  | - CAPTCHAs Encountered: 90
+daily_scraper  | - Session Rotations: 90
+daily_scraper  | - Total Time Elapsed: 500.71 minutes
+daily_scraper  | ================================================================================
+daily_scraper  | 
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: north-and-valleys
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/north-and-valleys
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/north-and-valleys
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/north-and-valleys
+daily_scraper  | ✗ Max retries reached for page 1
+daily_scraper  | ✗ Failed to fetch first page
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: coastal-north
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/coastal-north
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/coastal-north
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/coastal-north
+daily_scraper  | ✗ Max retries reached for page 1
+daily_scraper  | ✗ Failed to fetch first page
+daily_scraper  | 
+daily_scraper  | 🔍 Starting scrape for area: south
+daily_scraper  | Fetching first page to determine total pages...
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/south
+daily_scraper  |   Retrying in 5s... (attempt 1/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/south
+daily_scraper  |   Retrying in 10s... (attempt 2/3)
+daily_scraper  | ✗ Network error fetching page 1: 503 Server Error: Service Temporarily Unavailable for url: https://www.yad2.co.il/realestate/rent/south
+daily_scraper  | ✗ Max retries reached for page 1
+daily_scraper  | ✗ Failed to fetch first page
+daily_scraper  | ✓ Marked 539 listings as deleted (not seen in 2+ days)
+daily_scraper  | 
+daily_scraper  | ✓ Scraping session complete!
+daily_scraper  | Telegram update sent successfully.
+daily_scraper  | ✓ Disconnected from MongoDB
+[Kdaily_scraper exited with code 0
+ Compose Stopping Aborting on container exit...
+ Container daily_scraper Stopping 
+ Container daily_scraper Stopped 
