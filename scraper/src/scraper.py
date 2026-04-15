@@ -38,6 +38,7 @@ class Yad2Scraper:
         self.total_validation_failures = 0
         self.total_captchas_encountered = 0
         self.total_session_rotations = 0
+        self.total_elapsed_time_seconds = 0
         self.start_time = None
         
         if self.save_html:
@@ -354,6 +355,7 @@ class Yad2Scraper:
                     updated = result['updated']
                     validation_failed = result.get('validation_failed', 0)
                     total_processed = inserted + updated
+
                     self.total_listings_inserted += total_processed
                     self.total_listings_new += inserted
                     self.total_listings_updated += updated
@@ -382,6 +384,9 @@ class Yad2Scraper:
             if max_pages and page_num >= max_pages:
                 break
         
+        elapsed_time_seconds = (datetime.now() - self.start_time).total_seconds() if self.start_time else 0
+        self.total_elapsed_time_seconds += elapsed_time_seconds
+        
         # Print summary
         self._print_summary()
     
@@ -392,7 +397,6 @@ class Yad2Scraper:
         Returns:
             Dictionary with session statistics
         """
-        elapsed_time = (datetime.now() - self.start_time).total_seconds() if self.start_time else 0
         avg_listings = self.total_listings_inserted / self.total_pages_scraped if self.total_pages_scraped > 0 else 0
         
         return {
@@ -404,7 +408,7 @@ class Yad2Scraper:
             'total_validation_failures': self.total_validation_failures,
             'total_captchas_encountered': self.total_captchas_encountered,
             'total_session_rotations': self.total_session_rotations,
-            'elapsed_time_seconds': elapsed_time,
+            'elapsed_time_seconds': self.total_elapsed_time_seconds,
             'average_listings_per_page': avg_listings
         }
     

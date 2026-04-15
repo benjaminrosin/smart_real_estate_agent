@@ -9,8 +9,10 @@ services:
     env_file:
       - ./scraper/.env
     volumes:
+      - ./logs:/logs
       - ./data:/app/data
     restart: "no"
+    stop_grace_period: 45s
     tty: true
     stdin_open: true
     profiles:
