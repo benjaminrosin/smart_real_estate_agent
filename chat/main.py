@@ -198,6 +198,10 @@ def handle_name_input_logic(message):
     logger.debug("Name input handler called user_id=%s", message.from_user.id)
     
     chat_id = message.chat.id
+    if not message.text:
+        bot.send_message(chat_id, "⚠️ Please send a text name, or /cancel to cancel.")
+        return
+
     new_name = message.text.strip()
     
     # Handle cancel

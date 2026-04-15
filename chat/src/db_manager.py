@@ -152,15 +152,16 @@ class UserDBManager:
         if not self._connected:
             raise RuntimeError("Not connected to database. Call connect() first.")
         
+        safe_updates = dict(updates or {})
         # Add updated timestamp
-        updates["updated_at"] = datetime.utcnow()
+        safe_updates["updated_at"] = datetime.utcnow()
         
         result = self.collection.update_one(
             {"chat_id": chat_id},
-            {"$set": updates}
+            {"$set": safe_updates}
         )
         
-        return result.modified_count > 0
+        return result.matched_count > 0
     
     def user_exists(self, chat_id: int) -> bool:
         """

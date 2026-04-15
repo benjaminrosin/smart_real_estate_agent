@@ -39,7 +39,7 @@ CRITICAL FORMATTING RULES - MUST FOLLOW EXACTLY:
   * <i>italic text</i> for subtle emphasis
 - ABSOLUTELY FORBIDDEN: 
   * DO NOT USE: **text** or *text* (markdown syntax)
-  * DO NOT USE: <br>, <big>, <small>, <u>, <span>, <div>, <a>, <code>, <pre>
+    * DO NOT USE: <br>, <big>, <small>, <u>, <span>, <div>, <a>, <code>, <pre>
   * DO NOT USE: ANY HTML tags other than <b> and <i>
 - Use simple line breaks (press Enter twice) to separate paragraphs
 - For lists, use simple bullet points (•) or asterisks (*) with newlines between items
@@ -249,7 +249,7 @@ def chat(user_id: str, message: str) -> Dict[str, Any]:
             primary_listing = tool_payload.get("primary_listing")
             listing_cards = tool_payload.get("listing_cards", [])
             if assistant_text:
-                final_text = str(assistant_text)
+                final_text = _sanitize_output(str(assistant_text))
                 structured_response = {
                     "text": final_text,
                     "primary_listing": primary_listing,
@@ -267,9 +267,17 @@ def chat(user_id: str, message: str) -> Dict[str, Any]:
             "I can still help if you share city, budget, and rooms, and I will try again."
         )
 
-    history.add_user_message(message)
-    history.add_ai_message(final_text)
-    logger.debug("History persisted session_id=%s response_excerpt=%s", session_id, _truncate(final_text))
+    try:
+        history.add_user_message(message)
+    except Exception:
+        logger.exception("Failed to persist user message session_id=%s", session_id)
+
+    try:
+        history.add_ai_message(final_text)
+    except Exception:
+        logger.exception("Failed to persist assistant message session_id=%s", session_id)
+
+    logger.debug("History persistence attempted session_id=%s response_excerpt=%s", session_id, _truncate(final_text))
 
     if structured_response:
         return structured_response
