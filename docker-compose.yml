@@ -6,8 +6,11 @@ services:
       dockerfile: Dockerfile
     image: my-scraper:latest
     container_name: daily_scraper
+    volumes:
+      - ./logs:/logs
     env_file:
       - ./scraper/.env
     restart: "no"
+    stop_grace_period: 45s
     tty: true
     stdin_open: true 
