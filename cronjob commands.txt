@@ -1,5 +1,17 @@
-# creating and running the scraper container every day at 2 AM, logging output to a dated log file
-0 2 * * * cd ~/project/smart_real_estate_agent && docker compose up --build --abort-on-container-exit >> ~/project/smart_real_estate_agent/logs/scraper_$(date +\%F).log 2>&1
+# keep chat bot running after VPS reboot (and build latest image on boot)
+@reboot cd ~/project/smart_real_estate_agent && docker compose --profile chat up -d --build chat >> ~/project/smart_real_estate_agent/logs/chat_boot.log 2>&1
+
+# start chat runtime log streaming on reboot (writes to a dated file)
+@reboot sh -c 'pkill -f "docker logs -f --timestamps telegram_chatbot" 2>/dev/null; docker logs -f --timestamps telegram_chatbot >> ~/project/smart_real_estate_agent/logs/chat_$(date +\%F).log 2>&1 &'
+
+# rotate chat runtime log at midnight by restarting the log streamer with a new date-based file
+0 0 * * * sh -c 'pkill -f "docker logs -f --timestamps telegram_chatbot" 2>/dev/null; docker logs -f --timestamps telegram_chatbot >> ~/project/smart_real_estate_agent/logs/chat_$(date +\%F).log 2>&1 &'
+
+# create and run only the scraper container every day at 2 AM, logging output to a dated log file
+0 2 * * * cd ~/project/smart_real_estate_agent && docker compose --profile scraper up --build --abort-on-container-exit scraper >> ~/project/smart_real_estate_agent/logs/scraper_$(date +\%F).log 2>&1
 
 # deleting log files older than 5 days
 0 0 * * * find ~/project/smart_real_estate_agent/logs/ -name "scraper_*.log" -type f -mtime +5 -delete
+
+# deleting chat log files older than 5 days
+5 0 * * * find ~/project/smart_real_estate_agent/logs/ -name "chat_*.log" -type f -mtime +5 -delete
