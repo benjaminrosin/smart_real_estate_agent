@@ -1,0 +1,5 @@
+# creating and running the scraper container every day at 2 AM, logging output to a dated log file
+0 2 * * * cd ~/project/smart_real_estate_agent && docker compose up --build --abort-on-container-exit >> ~/project/smart_real_estate_agent/logs/scraper_$(date +\%F).log 2>&1
+
+# deleting log files older than 5 days
+0 0 * * * find ~/project/smart_real_estate_agent/logs/ -name "scraper_*.log" -type f -mtime +5 -delete
